@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import org.springframework.stereotype.Component;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 /**
  * Respresenta un Testimonio
  */
@@ -13,6 +15,8 @@ public class Testimonio {
 	private Long id;
 	private LocalDate fecha;
 	private Usuario usuario;
+	@NotEmpty(message="*Agregue un Comentario")
+	@Size(min=4,message="*Debe tener almenos 4 caracteres")
 	private String comentario;
 	private boolean estado;
 	
