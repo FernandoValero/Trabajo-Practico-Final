@@ -1,9 +1,16 @@
 package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
-
 import org.springframework.stereotype.Component;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 /**
@@ -11,13 +18,26 @@ import jakarta.validation.constraints.Size;
  */
 @Component
 @Entity
+@Table(name= "testimonios")
 public class Testimonio {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="testi_id")
 	private Long id;
+	
+	@Column(name="testi_fecha")
 	private LocalDate fecha;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id")
 	private Usuario usuario;
+	
 	@NotEmpty(message="*Agregue un Comentario")
 	@Size(min=4,message="*Debe tener almenos 4 caracteres")
+	@Column(name="testi_comentario")
 	private String comentario;
+	
+	@Column(name="testi_estado")
 	private boolean estado;
 	
 	public Testimonio() {
@@ -110,6 +130,4 @@ public class Testimonio {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
-	
-
 }
