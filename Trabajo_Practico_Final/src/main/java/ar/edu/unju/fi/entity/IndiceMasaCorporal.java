@@ -12,6 +12,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 
 /**
  * Representa un Indice de Masa Corporal
@@ -52,7 +54,9 @@ public class IndiceMasaCorporal {
     /**
      * Representa el peso del usuario.
      */
-    @Column(name = "imc_peso")    
+    @Column(name = "imc_peso")
+    @NotEmpty(message = "Debe ingresar un valor")
+    @Min(value = 1, message = "el valor ingresado tiene que ser mayor que 0")
     private double peso;
 
 
@@ -169,6 +173,25 @@ public class IndiceMasaCorporal {
      */
     public void setPeso(double peso) {
         this.peso = peso;
+    }
+
+    /**
+     * Método que calcula el IMC de una persona según su peso y su altura.
+     * el peso tiene que ser en [Kg].
+     * la estatua tiene que ser en [m].
+     * @return un mensaje con el resultado del calculo.
+     */
+    public String calcularIMC() {
+        double imc = this.peso / Math.pow(this.usuario.getEstatura(), 2);
+        if (imc < 18.5) {
+            return "IMC: " + imc + " Está por debajo de su peso normal.";
+        } else {
+            if (imc >= 18.5 && imc <= 25) {
+                return "IMC: " + imc + " Está en su peso normal.";
+            } else {
+                return "Tiene sobrepeso";
+            }
+        }
     }
 
 }
