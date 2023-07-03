@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Registros</title>
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		/>
+		<style>
+			.formulario {
+				border: 1px solid #ccc;
+				padding: 20px;
+				width: 300px;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="formulario">
+			<h2>Registrarme</h2>
+			<form>
+				<div class="form-group">
+					<label for="nombre">Nombre:</label>
+					<input
+						type="text"
+						class="form-control"
+						id="nombre"
+						name="nombre"
+						required
+					/>
+				</div>
+
+				<div class="form-group">
+					<label for="apellido">Apellido:</label>
+					<input
+						type="text"
+						class="form-control"
+						id="apellido"
+						name="apellido"
+						required
+					/>
+				</div>
+
+				<div class="form-group">
+					<label for="email">E-mail:</label>
+					<input
+						type="email"
+						class="form-control"
+						id="email"
+						name="email"
+						required
+					/>
+				</div>
+
+				<div class="form-group">
+					<label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+					<input
+						type="date"
+						class="form-control"
+						id="fecha_nacimiento"
+						name="fecha_nacimiento"
+						required
+					/>
+				</div>
+
+				<div class="form-group">
+					<label for="telefono">Teléfono:</label>
+					<input
+						type="tel"
+						class="form-control"
+						id="telefono"
+						name="telefono"
+						required
+					/>
+				</div>
+
+				<div class="form-group">
+					<label for="sexo">Sexo:</label>
+					<select class="form-control" id="sexo" name="sexo" required>
+						<option value="masculino">Masculino</option>
+						<option value="femenino">Femenino</option>
+						<option value="otro">Otro</option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="estatura">Estatura:</label>
+					<input
+						type="number"
+						class="form-control"
+						id="estatura"
+						name="estatura"
+						step="0.01"
+						required
+					/>
+				</div>
+
+				<button type="submit" class="btn btn-primary">Enviar</button>
+			</form>
+		</div>
+
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	</body>
+</html>
