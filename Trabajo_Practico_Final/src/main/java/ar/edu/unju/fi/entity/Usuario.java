@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 import jakarta.persistence.Column;
@@ -8,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -62,6 +64,12 @@ public class Usuario {
 	
 	@Column(name="usu_estado")
 	private boolean estado;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<IndiceMasaCorporal> imcs;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Testimonio> testimonios;
 	
 	public Usuario(){
 		// TODO Auto-generated constructor stub
@@ -245,4 +253,19 @@ public class Usuario {
 		this.estado = estado;
 	}
 	
+	public List<IndiceMasaCorporal> getImcs() {
+		return imcs;
+	}
+
+	public void setImcs(List<IndiceMasaCorporal> imcs) {
+		this.imcs = imcs;
+	}
+
+	public List<Testimonio> getTestimonios() {
+		return testimonios;
+	}
+
+	public void setTestimonios(List<Testimonio> testimonios) {
+		this.testimonios = testimonios;
+	}
 }
