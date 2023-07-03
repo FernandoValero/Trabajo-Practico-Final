@@ -69,10 +69,13 @@ public class Usuario {
 	/**
      * Constructor de la entidad Usuario que recibe todos los parámetros.
      * @param id: el identificador del usuario.
-     * @param fecha: la fecha del testimonio.
-     * @param usuario: el usuario que hizo el testimonio.
-     * @param comentario: el comentario del testimonio.
-     * @param estado: el estado del testimonio.
+     * @param nombre: nombre del usuario.
+     * @param apellido: el apellido del usuario.
+     * @param email: el email del usuario.
+     * @param fechaNacimiento: la fecha de nacimiento del usuario.
+     * @param sexo: el sexo del usuario.
+     * @param estatura: la estatura del usuario.
+     * @param estado: el estado del usuario.
      */
 	public Usuario(Long id, String nombre, String apellido, String email, LocalDate fechaNacimiento, String telefono, String sexo, Double estatura, boolean estado){
 		super();
