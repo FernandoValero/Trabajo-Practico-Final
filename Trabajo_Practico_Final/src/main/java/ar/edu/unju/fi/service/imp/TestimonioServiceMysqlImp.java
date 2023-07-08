@@ -67,7 +67,7 @@ public class TestimonioServiceMysqlImp implements ITestimonioService {
     * @return un objeto testimonio.
     */
 	@Override
-	public Testimonio getProducto() {
+	public Testimonio getTestimonio() {
 		return testimonio;
 	}
 }
