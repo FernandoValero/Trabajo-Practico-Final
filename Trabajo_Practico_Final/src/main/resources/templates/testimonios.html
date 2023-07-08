@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{layouts/head :: head}">
+	<title>Testimonios</title>
+</head>
+<body>
+	<nav th:replace="~{layouts/nav :: nav}"></nav>
+	<div th:each="testimonio : ${testimonios}" class="card border-primary mb-3" style="max-width: 18rem;">
+    	<div th:text="${testimonio.usuario}" class="card-header"><i class="fa-regular fa-circle-user"></i></div>
+    	<div class="card-body text-primary">
+	        <h5 class="card-title" th:text="${testimonio.fecha}"></h5>
+	        <p class="card-text" th:text="${testimonio.comentario}"></p>
+	    </div>
+	</div>
+	<div>
+		<a th:href="@{/testimonio/nuevo}" ><i class="agregar fa-solid fa-circle-plus"></i></a>
+	</div>
+	<footer th:replace="~{layouts/footer :: footer}"></footer>
+	<div th:replace="~{layouts/script :: script}"></div>
+</body>
+</html>
