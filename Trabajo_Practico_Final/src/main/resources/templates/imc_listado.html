@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="~{layouts/head :: head}"></head>
+
+<body>
+    <nav th:replace="~{layouts/nav :: nav}"></nav>
+
+
+    <div>
+        <h2>IMC</h2>
+        <h3 th:text="${usuario.nombre}+' '+${usuario.apellido}"></h3>
+        <h3 th:text="${usuario.estatura}"></h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>codigo</th>
+                    <th>imc</th>
+
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr th:each="imc:${listadoImc}">
+                    <td th:text="${imc.id}"></td>
+                    <td th:text="${imc.calcularIMC()}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <footer th:replace="~{layouts/footer :: footer}"></footer>
+    <div th:replace="~{layouts/script :: script}"></div>
+
+</body>
