@@ -1,22 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-<title>Registros</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-<style>
-.formulario {
-	border: 1px solid #ccc;
-	padding: 20px;
-	width: 300px;
-	margin: 0 auto;
-}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1,maximum-scale=1, user-scaleble=no">
+<title>Recetas</title>
+<link th:href="@{/css/estilos.css}" rel="stylesheet">
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet">
 </head>
 <body>
 	<nav th:replace="~{layouts/nav :: nav}"></nav>
 	<div class="formulario">
-		<h2>Registrarme</h2>
+		<h1>Registrarme</h1>
 		<form>
 			<div class="form-group">
 				<label for="nombre">Nombre:</label> <input type="text"
