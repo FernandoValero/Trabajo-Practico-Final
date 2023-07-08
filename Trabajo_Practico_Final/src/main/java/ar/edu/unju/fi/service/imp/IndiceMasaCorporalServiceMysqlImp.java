@@ -3,12 +3,14 @@ package ar.edu.unju.fi.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import ar.edu.unju.fi.entity.IndiceMasaCorporal;
 import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.repository.IIndiceMasaCorporalRepository;
 import ar.edu.unju.fi.service.IIndiceMasaCorporalService;
 
+@Service("imcServiceMysql")
 public class IndiceMasaCorporalServiceMysqlImp implements IIndiceMasaCorporalService {
 
     @Autowired
