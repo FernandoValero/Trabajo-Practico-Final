@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import ar.edu.unju.fi.entity.IndiceMasaCorporal;
 import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.repository.IIndiceMasaCorporalRepository;
-import ar.edu.unju.fi.service.IIndiceMasaCorporal;
+import ar.edu.unju.fi.service.IIndiceMasaCorporalService;
 
-public class IndiceMasaCorporalMysqlImp implements IIndiceMasaCorporal {
+public class IndiceMasaCorporalServiceMysqlImp implements IIndiceMasaCorporalService {
 
     @Autowired
     private IIndiceMasaCorporalRepository imcRespository;

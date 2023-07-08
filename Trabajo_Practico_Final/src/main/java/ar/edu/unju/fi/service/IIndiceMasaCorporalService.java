@@ -5,7 +5,7 @@ import java.util.List;
 import ar.edu.unju.fi.entity.IndiceMasaCorporal;
 import ar.edu.unju.fi.entity.Usuario;
 
-public interface IIndiceMasaCorporal {
+public interface IIndiceMasaCorporalService {
     
     /**
      * Método que retorna una lista de objetod de tipo IndiceMasaCorporal.
