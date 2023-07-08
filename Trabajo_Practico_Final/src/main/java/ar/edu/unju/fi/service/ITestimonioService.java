@@ -38,5 +38,5 @@ public interface ITestimonioService {
     * Obtiene un nuevo testimonio.
     * @return un objeto testimonio.
     */
-	Testimonio getProducto();
+	Testimonio getTestimonio();
 }
