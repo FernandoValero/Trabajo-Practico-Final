@@ -63,6 +63,9 @@ public class Usuario {
 	@Column(name="usu_estatura")
 	private Double estatura;
 	
+	@Column(name="usu_admin")
+	private boolean admin;
+	
 	@Column(name="usu_estado")
 	private boolean estado;
 	
@@ -84,9 +87,10 @@ public class Usuario {
      * @param fechaNacimiento: la fecha de nacimiento del usuario.
      * @param sexo: el sexo del usuario.
      * @param estatura: la estatura del usuario.
+     * @param admin: administracion del usuario
      * @param estado: el estado del usuario.
      */
-	public Usuario(Long id, String nombre, String apellido, String email, LocalDate fechaNacimiento, String telefono, String sexo, Double estatura, boolean estado){
+	public Usuario(Long id, String nombre, String apellido, String email, LocalDate fechaNacimiento, String telefono, String sexo, Double estatura,boolean admin, boolean estado){
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -96,6 +100,7 @@ public class Usuario {
 		this.telefono = telefono;
 		this.sexo = sexo;
 		this.estatura = estatura;
+		this.admin = admin;
 		this.estado = estado;
 	}
 
@@ -236,7 +241,21 @@ public class Usuario {
 	public void setEstatura(Double estatura) {
 		this.estatura = estatura;
 	}
+	/**
+     * Verifica si un usuario es admin.
+     * @return admin, si el usuario es admin o no.
+     */
+	public boolean isAdmin() {
+		return admin;
+	}
 
+	/**
+     * Establece si un usuario es administrador.
+     * @param admin: admin del usuario.
+     */
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 
 	/**
      * Verifica el estado del usuario.
