@@ -71,4 +71,21 @@ public class UsuarioServiceMysqlImp implements IUsuarioService {
 		public Usuario getUsuario() {
 			return usuario;
 		}
+		
+		
+		/**
+		 * Método que busca un usuario según su Id y su tipo de usuario.
+		 * 
+		 * @param id parametro dle tipo Long que representa el Id del usuario.
+		 * @param admin parametro del tipo boolean que si es true es administrador, false en otro caso.
+		 * @return un objeto dle tipo usuario.
+		 */
+		@Override
+		public Usuario getByIdAndAdmin(Long id, boolean admin) {
+			List<Usuario> listado = usuarioRepository.findByIdAndAdmin(id, admin);
+			if (listado.isEmpty()) {
+				return null;
+			}
+			return listado.get(0);
+		}
 }
