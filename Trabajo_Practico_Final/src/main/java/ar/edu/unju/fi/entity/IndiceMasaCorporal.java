@@ -1,11 +1,13 @@
 package ar.edu.unju.fi.entity;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,7 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
+
 
 /**
  * Representa un Indice de Masa Corporal
@@ -47,7 +49,7 @@ public class IndiceMasaCorporal {
     /**
      * Representa a un usuario.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
     
@@ -55,10 +57,8 @@ public class IndiceMasaCorporal {
      * Representa el peso del usuario.
      */
     @Column(name = "imc_peso")
-    @NotEmpty(message = "Debe ingresar un valor")
-    @Min(value = 1, message = "el valor ingresado tiene que ser mayor que 0")
+    @Min(value = 1, message = "el valor ingresado tiene que ser mayor que 0")    
     private double peso;
-
 
     /**
      * Constructor por defecto
@@ -183,13 +183,14 @@ public class IndiceMasaCorporal {
      */
     public String calcularIMC() {
         double imc = this.peso / Math.pow(this.usuario.getEstatura(), 2);
+        DecimalFormat df = new DecimalFormat("##.#");        
         if (imc < 18.5) {
-            return "IMC: " + imc + " Está por debajo de su peso normal.";
+            return "Su IMC es " + df.format(imc) + " -  Está por debajo de su peso normal.";
         } else {
             if (imc >= 18.5 && imc <= 25) {
-                return "IMC: " + imc + " Está en su peso normal.";
+                return "Su IMC es " +df.format(imc) + " -  Está en su peso normal.";
             } else {
-                return "Tiene sobrepeso";
+                return "Su IMC es " +df.format(imc) + " -  Tiene sobrepeso";
             }
         }
     }

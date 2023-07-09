@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="~{layouts/head :: head}"></head>
+
+<body>
+    <nav th:replace="~{layouts/nav :: nav}"></nav>
+    <div class="container" style="min-height: 60vh;">
+        <div class="row">
+            <div class="card text-center col-xs-12 col-sm-12 col-md-4 offset-md-4 mt-3">
+                <div class="card-header">
+                    Login
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/servicio/imc/buscar}" method="get">
+                        <h5 class="card-title">Ingrese Identificador de Usuario</h5>
+    
+                        <input type="number" name="id" required class="form-control mt-3 mb-3">
+                        <div class="alert alert-danger" role="alert" th:if="${!existeUsuario}">Usuario inexistente</div>
+                        <button class="btn btn-info mt-3 mb-3" type="submit">Ingresar</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- <div>
+        <form th:action="@{/servicio/imc/buscar}" method="get">
+            <p>Ingrese el id de usuario</p>
+            <input type="number" name="id" required>
+            <div th:if="${!existeUsuario}">Usuario inexistente</div>
+            <button type="submit">Ingresar</button>
+        </form>
+    </div> -->
+
+    <footer th:replace="~{layouts/footer :: footer}"></footer>
+    <div th:replace="~{layouts/script :: script}"></div>
+
+</body>
+
+</html>
