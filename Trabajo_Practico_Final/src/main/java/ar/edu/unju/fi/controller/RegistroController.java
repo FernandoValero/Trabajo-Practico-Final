@@ -127,5 +127,6 @@ public class RegistroController {
         model.addAttribute("guardadoExitoso", true);
         return "registros";
     }
+    
 }
 
