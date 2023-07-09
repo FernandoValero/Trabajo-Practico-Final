@@ -66,7 +66,7 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 	
 	/*
 	 * Método para eliminar una receta.
-	 * Remueve la sucursal de la lista de recetas.
+	 * Remueve la receta de la lista de recetas.
 	 */
 	@Override
 	public void eliminar(Receta recetaEncontrada) {
