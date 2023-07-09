@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{/layouts/head :: head}"></head>
+<body>
+	<nav th:replace="~{layouts/nav :: nav}"></nav>
+	<header class="encabezado container-sm">
+		<div class="row">
+					<div class="col-3"></div>
+					<h1 class="titulo col-6">Ingredientes</h1>
+					<div class="col-3"></div>
+				</div>
+	</header>
+	<div class="container-fluid cuerpo">
+		<table class="table caption-top">
+		<tr>
+			<th scope="col" class="text-dark"><strong>Nombre</strong></th>
+			<th scope="col" class="text-dark"><strong>Acciones</strong></th>
+			
+		</tr>
+		 <tr th:each="lista_ingredientes: ${ingredientes}">
+			
+			<td th:text="${lista_ingredientes.nombre}"></td> 
+			<!--  <td><a th:href="@{/ingrediente/eliminar/}+${lista_ingredientes.id}"></a></td>-->
+		</tr>
+		</table>
+	</div>
+	<div class="guardar">
+		<a th:href="@{/servicio/nuevo}"><i class="agregar fa-solid fa-circle-plus"></i></a>
+	</div>
+	<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<div th:replace="~{layouts/script :: script}"></div>
+</body>
+</html>
