@@ -34,7 +34,9 @@ public class TestimonioController {
 	* @return vista "testimonios".
 	*/
 	@GetMapping("/listado/{admin}")
-	public String getTestimonioPage(@PathVariable(value="accion")String admin,Model model) {
+	public String getTestimonioPage(@PathVariable(value="admin")String admin, Model model) {
+		boolean accion = admin.equals("admin");
+		model.addAttribute("accion", accion);
 		model.addAttribute("testimonios", testimonioService.getLista());
 		return "testimonios";
 	}
@@ -68,7 +70,7 @@ public class TestimonioController {
 				else {
 					accion = accion * -1;
 					Testimonio testimonioEncontrado = testimonioService.getBy(accion);
-					if(usuarioEncontrado.getId()==testimonioEncontrado.getUsuario().getId()) {
+					if(usuarioEncontrado.isAdmin() ||usuarioEncontrado.getId()==testimonioEncontrado.getUsuario().getId()) {
 						modelAndView.addObject("id", accion);
 						modelAndView.setViewName("redirect:/testimonio/eliminar/{id}");
 					}
