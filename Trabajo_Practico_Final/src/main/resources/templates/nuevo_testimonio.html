@@ -16,7 +16,8 @@
 		<div class="mb-3" th:if="${edicion}">
 			<input class="form-control" type="hidden" th:field="*{fecha}">
 		</div>
-		<div class="mb-3" th:if="${edicion}">
+		<div class="mb-3">
+			<div th:text="*{usuario.nombre}"></div>
 			<input class="form-control" type="hidden" th:field="*{usuario}">
 		</div>
 		<div class="mb-3">

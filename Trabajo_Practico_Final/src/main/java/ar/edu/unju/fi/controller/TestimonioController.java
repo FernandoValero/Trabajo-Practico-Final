@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.entity.Testimonio;
+import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.service.ITestimonioService;
+import ar.edu.unju.fi.service.IUsuarioService;
 import jakarta.validation.Valid;
 
 
@@ -24,22 +27,72 @@ public class TestimonioController {
 	
 	@Autowired
 	private ITestimonioService testimonioService;
+	@Autowired
+	private IUsuarioService usuarioService;
 	/**
 	* Método que obtiene listado de testimonios.
 	* @return vista "testimonios".
 	*/
-	@GetMapping("/listado")
-	public String getTestimonioPage(Model model) {
+	@GetMapping("/listado/{admin}")
+	public String getTestimonioPage(@PathVariable(value="accion")String admin,Model model) {
 		model.addAttribute("testimonios", testimonioService.getLista());
 		return "testimonios";
+	}
+	@GetMapping("/verificar/{accion}")
+	public String getIngresoUsuarioPage(@PathVariable(value="accion")Long accion, Model model) {
+		model.addAttribute("accion", accion);
+		return "testimonio_accion";
+	}
+	@PostMapping("/validar")
+	public ModelAndView getIngresarFormularioTestimonioPage(@RequestParam(name="clave") Long clave,@RequestParam(name="accion") Long accion) {
+		ModelAndView modelAndView = new ModelAndView();
+		Usuario usuarioEncontrado = usuarioService.getBy(clave);
+		System.out.println("Texto: "+accion);
+		if(usuarioEncontrado!=null) {
+			if(accion == 0) {
+				modelAndView.addObject("id", usuarioEncontrado.getId());
+				modelAndView.setViewName("redirect:/testimonio/nuevo/{id}");
+			}
+			else {
+				
+				if(accion > 0) {
+					Testimonio testimonioEncontrado = testimonioService.getBy(accion);
+					if(usuarioEncontrado.getId()==testimonioEncontrado.getUsuario().getId()) {
+						modelAndView.addObject("id", accion);
+						modelAndView.setViewName("redirect:/testimonio/modificar/{id}");
+					}
+					else {
+						modelAndView.setViewName("redirect:/testimonio/listado");
+					}
+				}
+				else {
+					accion = accion * -1;
+					Testimonio testimonioEncontrado = testimonioService.getBy(accion);
+					if(usuarioEncontrado.getId()==testimonioEncontrado.getUsuario().getId()) {
+						modelAndView.addObject("id", accion);
+						modelAndView.setViewName("redirect:/testimonio/eliminar/{id}");
+					}
+					else {
+						modelAndView.setViewName("redirect:/testimonio/listado");
+					}
+				}
+			}
+		}
+		else {
+			modelAndView.setViewName("redirect:/testimonio/listado");
+		}
+		return modelAndView;
 	}
 	/**
 	* Método del formulario para la creación de un nuevo testimonio.
 	* @return vista "nuevo_testimonio".
 	*/
-	@GetMapping("/nuevo")
-	public String getNuevoTestimonioPage(Model model) {
-		model.addAttribute("testimonio", testimonioService.getTestimonio());
+	@GetMapping("/nuevo/{id}")
+	public String getNuevoTestimonioPage(Model model, @PathVariable(value="id")Long id) {
+		Usuario usuarioEncontrado = usuarioService.getBy(id);
+		Testimonio testimonio = testimonioService.getTestimonio();
+		testimonio.setUsuario(usuarioEncontrado);
+		model.addAttribute("testimonio", testimonio);
 		model.addAttribute("edicion", false);
 		return "nuevo_testimonio";
 	}
@@ -55,7 +108,6 @@ public class TestimonioController {
 			modelAndView.addObject("testimonio", testimonio);
 			return modelAndView;
 		}
-		testimonio.setUsuario(null);
 		testimonio.setFecha(LocalDate.now());
 		testimonio.setEstado(true);
 		testimonioService.guardar(testimonio);
@@ -70,7 +122,7 @@ public class TestimonioController {
 	public String getModificarTestimonioPage(Model model, @PathVariable(value="id")Long id) {
 		model.addAttribute("testimonio", testimonioService.getBy(id));
 		model.addAttribute("edicion", true);
-		return "nuevo_producto";
+		return "nuevo_testimonio";
 	}
 	/**
 	* Método para modificar un testimonio existente.
@@ -82,7 +134,6 @@ public class TestimonioController {
 			model.addAttribute("edicion", true);
 			return "nuevo_testimonio";
 		}
-		testimonio.setUsuario(null);
 		testimonio.setFecha(LocalDate.now());
 		testimonioService.modificar(testimonio);
 		return "redirect:/testimonio/listado";
