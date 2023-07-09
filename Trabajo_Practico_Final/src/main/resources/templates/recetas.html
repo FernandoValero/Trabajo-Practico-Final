@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head th:replace="~{/layouts/head :: head}"></head>
+	<body>
+		<nav th:replace="~{layouts/nav :: nav}" ></nav>
+		<header class="encabezado container-sm">
+				<div class="row">
+					<div class="col-3"></div>
+					<h1 class="titulo col-6">Recetas</h1>
+					<div class="col-3"></div>
+				</div>
+		</header>
+			<div class="container-fluid cuerpo_recetas" th:if="!${#lists.isEmpty(recetas)}" >
+			<div class="container-fluid recetas">
+				
+				<div class="receta"  th:each="lista_recetas: ${recetas}">
+					<p th:text="${lista_recetas.nombre}"></p>
+					<p th:text="${lista_recetas.categoria}"></p>
+					<p th:text="${lista_recetas.ingrediente}"></p>
+					<p th:text="${lista_recetas.preparacion}"></p>
+				</div>
+				
+			</div>
+		</div>	
+		
+		
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<div th:replace="~{layouts/script :: script}"></div>
+	</body>
+</html>
