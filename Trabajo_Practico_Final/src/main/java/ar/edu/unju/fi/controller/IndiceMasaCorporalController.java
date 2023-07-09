@@ -97,7 +97,7 @@ public class IndiceMasaCorporalController {
 
 			imc.setUsuario(usuarioBuscado);
 			model.addAttribute("imc", imc);
-			model.addAttribute("titulo", "Calculadora IMC");			
+			model.addAttribute("titulo", "Calculadora IMC");
 			return "imc_calculadora";
 		}
 
@@ -131,19 +131,20 @@ public class IndiceMasaCorporalController {
 	}
 
 	/**
-	 * Método que renderiza la página de gestiónde IMC.
+	 * Método que renderiza la página de login de gestión de IMC.
 	 * 
-	 * @param model del tipo Model que se usa para enviar datos entre la vista y el controller.
-	 * @return la vista de gestion de imc.
+	 * @param model del tipo Model que se usa para enviar datos entre la vista y el
+	 *              controller.
+	 * @return la vista de login de gestion de imc.
 	 */
 	@GetMapping("/gestion")
-	public String getGestioIMC(Model model){
-		model.addAttribute("titulo", "Gestion | IMC");
-		model.addAttribute("listadoImc", imcService.getListaImc());
-		return "gestion_imc";
+	public String getGestioIMC(Model model) {
+		model.addAttribute("titulo", "Login Gestion");
+		model.addAttribute("existeUsuario", true);
+		// model.addAttribute("listadoImc", imcService.getListaImc());
+		return "login_gestion_imc";
 	}
 
-	
 	/**
 	 * Método que elimina un imc según su id.
 	 * 
@@ -151,8 +152,23 @@ public class IndiceMasaCorporalController {
 	 * @return String que representa la vista de gestionde imc.
 	 */
 	@GetMapping("/gestion/eliminar/{id}")
-	public String eliminarIMC(@PathVariable(value ="id")Long id){
+	public String eliminarIMC(@PathVariable(value = "id") Long id) {
 		imcService.eliminarById(id);
 		return "redirect:/servicio/imc/gestion";
 	}
+
+	@GetMapping("/validar")
+	public String buscarUsuarioAdmin(@RequestParam(value = "id") Long id, Model model) {
+		Usuario usuarioBuscado = usuarioService.getByIdAndAdmin(id, true);
+		if (usuarioBuscado != null) {
+			model.addAttribute("titulo", "Gestion | IMC");
+			model.addAttribute("listadoImc", imcService.getListaImc());
+			return "gestion_imc";
+		} else {
+			model.addAttribute("existeUsuario", false);
+			model.addAttribute("titulo", "Login Gestión");
+			return "login_gestion_imc";
+		}
+	}
+
 }
