@@ -13,7 +13,6 @@
 	<nav th:replace="~{layouts/nav :: nav}"></nav>
 	<div class="formulario" th:unless="${guardadoExitoso}">
 		<h1 th:text="${perfil}"></h1>
-		<!--  <h1 th:text="${edicion}?'Modificar':'Registrarme'"></h1> hecho con sebas-->
 		<form th:action="@{/registro/enviar}" th:object="${usuario}"
 			method="post">
 			<div class="mb-3">
