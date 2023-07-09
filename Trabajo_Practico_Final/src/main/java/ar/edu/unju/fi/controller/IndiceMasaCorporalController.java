@@ -129,4 +129,30 @@ public class IndiceMasaCorporalController {
 		model.addAttribute("listadoImc", imcService.getListaByUsuarioAndEstado(usuarioBuscado, true));
 		return "imc_listado";
 	}
+
+	/**
+	 * Método que renderiza la página de gestiónde IMC.
+	 * 
+	 * @param model del tipo Model que se usa para enviar datos entre la vista y el controller.
+	 * @return la vista de gestion de imc.
+	 */
+	@GetMapping("/gestion")
+	public String getGestioIMC(Model model){
+		model.addAttribute("titulo", "Gestion | IMC");
+		model.addAttribute("listadoImc", imcService.getListaImc());
+		return "gestion_imc";
+	}
+
+	
+	/**
+	 * Método que elimina un imc según su id.
+	 * 
+	 * @param id parametro del tipo long que representa el id del imc
+	 * @return String que representa la vista de gestionde imc.
+	 */
+	@GetMapping("/gestion/eliminar/{id}")
+	public String eliminarIMC(@PathVariable(value ="id")Long id){
+		imcService.eliminarById(id);
+		return "redirect:/servicio/imc/gestion";
+	}
 }
