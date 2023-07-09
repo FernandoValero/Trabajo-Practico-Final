@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="~{layouts/head :: head}"></head>
+
+<body>
+    <nav th:replace="~{layouts/nav :: nav}"></nav>
+    <div class="container">
+        <div class="row col-md-8 offset-md-2 mt-5">
+            <div class="card bg-success ">
+                <div class="card-header text-center fs-3 bg-white">Peso Ideal</div>
+                <div class="card-body bg-white text-center">
+                    <div class="mb-3">
+                        <h2 th:text="${usuario.nombre}+' '+${usuario.apellido}"></h2>
+                    </div>
+                    <div class="mb-3">                        
+                        <h3 th:text="'Estatura: '+${usuario.estatura}+'m'"></h3>
+
+                    </div>
+                    <div class="mb-3">                        
+                        <h3 th:text="'Edad: '+${usuario.getEdad()}+' años'"></h3>
+                    </div>
+                    <div class="mb-3">
+
+                        <h2 class="fw-bold" th:text="'Peso Ideal: '+${usuario.calcularPesoIdeal()+'Kg.'}"></h2>
+                    </div>
+                </div>
+                <div class="card-footer bg-white d-flex justify-content-center">
+                    <a class="btn btn-success" th:href="@{/index}">Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <footer th:replace="~{layouts/footer :: footer}"></footer>
+    <div th:replace="~{layouts/script :: script}"></div>
+
+</body>
+
+</html>

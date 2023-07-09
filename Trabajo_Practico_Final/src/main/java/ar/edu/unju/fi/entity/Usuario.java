@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.entity;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -267,5 +268,29 @@ public class Usuario {
 
 	public void setTestimonios(List<Testimonio> testimonios) {
 		this.testimonios = testimonios;
+	}
+
+
+	/**
+     * Método que determina la cantidad de años que tiene una persona según su fecha
+     * de nacimiento.
+     * 
+     * @return int
+     */
+	public int getEdad(){
+		Period tiempo = Period.between(this.fechaNacimiento, LocalDate.now());
+        return tiempo.getYears();
+	}
+
+	
+	/**
+	 * Método que calcula el peso ideal basado en la edad y el estatura.
+	 * 
+	 * @return double que es el peso ideal calculado.
+	 */
+	public double calcularPesoIdeal(){
+		double estaturaCentimetro = this.estatura * 100;
+		int edad = this.getEdad();
+		return estaturaCentimetro - 100 +((edad/10)*0.9);
 	}
 }
