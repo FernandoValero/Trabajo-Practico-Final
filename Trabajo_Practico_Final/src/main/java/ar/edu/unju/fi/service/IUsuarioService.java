@@ -44,5 +44,11 @@ public interface IUsuarioService {
 	    * @return un objeto usuario.
 	    */
 	Usuario getUsuario();
+
+	/**
+	 	* Obtiene un usuario según su id y su tipo de usuario.
+	 	* @return un objeto usuario
+	 */
+	Usuario getByIdAndAdmin(Long id, boolean admin);
 	
 }
