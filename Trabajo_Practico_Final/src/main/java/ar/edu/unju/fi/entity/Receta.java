@@ -10,6 +10,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
@@ -39,13 +41,18 @@ public class Receta {
 	 * Genera el ID automaticamente
 	 */
 	
-	@Column(name="id_receta")
+	@Column(name="id")
 	/*
 	 * La anotacion @Column se usa para asignar un nombre a la columna de la BD
 	 */
 	private Long id;
 	
 	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(
+    		name = "receta_ingrediente",
+    		joinColumns = @JoinColumn(name = "rec_id"),
+    		inverseJoinColumns = @JoinColumn(name = "ingr_id")
+    		)
 	private List<Ingrediente> ingredientes;
 	
 	@Column(name="nombre_receta")
@@ -213,20 +220,11 @@ public class Receta {
 	}
 	
 	
+	public List<Ingrediente> getIngredientes() {
+		return ingredientes;
+	}
+
+	public void setIngredientes(List<Ingrediente> ingredientes) {
+		this.ingredientes = ingredientes;
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
