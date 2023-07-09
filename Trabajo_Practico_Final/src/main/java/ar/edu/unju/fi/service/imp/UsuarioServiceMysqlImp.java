@@ -61,7 +61,8 @@ public class UsuarioServiceMysqlImp implements IUsuarioService {
 		    */
 		@Override
 		public Usuario getBy(Long id) {
-			return usuarioRepository.findById(id).get();
+			// return usuarioRepository.findById(id).get();
+			return usuarioRepository.findById(id).orElse(null);
 		}
 		/**
 		    * Obtiene un nuevo usuario.
