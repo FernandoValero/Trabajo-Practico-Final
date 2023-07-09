@@ -6,14 +6,16 @@
 <body>
 	<nav th:replace="~{layouts/nav :: nav}"></nav>
 	<div th:each="testimonio : ${testimonios}" class="card border-primary mb-3" style="max-width: 18rem;">
-    	<div th:text="${testimonio.usuario}" class="card-header"><i class="fa-regular fa-circle-user"></i></div>
+    	<div class="card-header text-primary"><i class="fa-regular fa-circle-user"> <span th:text="${testimonio.usuario.nombre}"></span> <span th:text="${testimonio.usuario.apellido}"></span></i></div>
     	<div class="card-body text-primary">
-	        <h5 class="card-title" th:text="${testimonio.fecha}"></h5>
-	        <p class="card-text" th:text="${testimonio.comentario}"></p>
+	        <h5 class="card-title" th:text="${testimonio.comentario}"></h5>
+	        <p class="card-text" th:text="${testimonio.fecha}"></p>
+	        <a th:if="!${accion}" th:href="@{/testimonio/verificar/}+${testimonio.id}"><i class="editar-prod fa-regular fa-pen-to-square"></i></a>
+			<a th:href="@{/testimonio/verificar/}+${testimonio.id*-1}"><i class="eliminar-prod fa-solid fa-trash-can"></i></a>
 	    </div>
 	</div>
-	<div>
-		<a th:href="@{/testimonio/nuevo}" ><i class="agregar fa-solid fa-circle-plus"></i></a>
+	<div th:if="!${accion}" >
+		<a th:href="@{/testimonio/verificar/{accion}(accion=${0})}"><i class="agregar fa-solid fa-circle-plus"></i></a>
 	</div>
 	<footer th:replace="~{layouts/footer :: footer}"></footer>
 	<div th:replace="~{layouts/script :: script}"></div>
