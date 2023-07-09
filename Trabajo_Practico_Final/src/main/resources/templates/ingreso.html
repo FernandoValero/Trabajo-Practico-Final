@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1,maximum-scale=1, user-scaleble=no">
+<title>Login</title>
+<link th:href="@{/css/estilos.css}" rel="stylesheet">
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet">
+</head>
+<body>
+	<nav th:replace="~{layouts/nav :: nav}"></nav>
+	<form th:action="@{/registro/buscar}" method="get">
+		<div class="form-group">
+			<label for="id">ID:</label> 
+			<input type="number" class="form-control"
+				id="id" name="id" required />
+		</div>
+		<input type="submit" class="btn btn-primary" value=login>
+	</form>
+	<footer th:replace="~{layouts/footer :: footer}"></footer>
+	<!-- <script type="text/javascrip" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script> -->
+	<div th:replace="~{layouts/script :: script}"></div>
+</body>
+</html>

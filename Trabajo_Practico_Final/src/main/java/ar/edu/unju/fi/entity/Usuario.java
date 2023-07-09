@@ -13,6 +13,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -59,7 +61,8 @@ public class Usuario {
 	@Column(name="usu_sexo")
 	private String sexo;
 	
-	@NotEmpty(message="*Debe de Escribir su Estatura")
+	@Min(value=0,message="Debe ser mayor a 0")
+	@Max(value=3,message="Debe ser menor o igual 3")
 	@Column(name="usu_estatura")
 	private Double estatura;
 	
