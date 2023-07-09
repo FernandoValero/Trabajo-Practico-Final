@@ -16,6 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 
+
 /**
  * Representa un Indice de Masa Corporal
  */
@@ -55,10 +56,9 @@ public class IndiceMasaCorporal {
     /**
      * Representa el peso del usuario.
      */
-    @Column(name = "imc_peso")    
-    @Min(value = 1, message = "el valor ingresado tiene que ser mayor que 0")
+    @Column(name = "imc_peso")
+    @Min(value = 1, message = "el valor ingresado tiene que ser mayor que 0")    
     private double peso;
-
 
     /**
      * Constructor por defecto
@@ -185,12 +185,12 @@ public class IndiceMasaCorporal {
         double imc = this.peso / Math.pow(this.usuario.getEstatura(), 2);
         DecimalFormat df = new DecimalFormat("##.#");        
         if (imc < 18.5) {
-            return "IMC: " + df.format(imc) + " Está por debajo de su peso normal.";
+            return "Su IMC es " + df.format(imc) + " -  Está por debajo de su peso normal.";
         } else {
             if (imc >= 18.5 && imc <= 25) {
-                return "IMC: " +df.format(imc) + " Está en su peso normal.";
+                return "Su IMC es " +df.format(imc) + " -  Está en su peso normal.";
             } else {
-                return "Tiene sobrepeso";
+                return "Su IMC es " +df.format(imc) + " -  Tiene sobrepeso";
             }
         }
     }

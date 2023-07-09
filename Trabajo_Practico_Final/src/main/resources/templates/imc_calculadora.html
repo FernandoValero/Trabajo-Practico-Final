@@ -1,27 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 <head th:replace="~{layouts/head :: head}"></head>
+
 <body>
     <nav th:replace="~{layouts/nav :: nav}"></nav>
+    <div class="container">
+        <div class="row">
+            <div class="card border-info mb-3 mt-3 col-xs-12 col-sm-12 col-md-8">
+                <div class="card-header text-center">Calculadora de Indice de Masa Corporal</div>
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-3">Datos del Usuario</h5>
+                    <form th:action="@{/servicio/imc/calcular}" th:object="${imc}" method="post">
+                        <input type="hidden" th:field="*{usuario.id}">
+                        <div class="mb-3 text-center">
+                            <label class="control-label">Usuario: </label>
+                            <label class="control-label" th:text="${imc.usuario.nombre}"></label>
+                        </div>
+
+                        <div class="mb-3 text-center">
+                            <label class="control-label">Estatura: </label>
+                            <label class="control-label" th:text="${imc.usuario.estatura}"></label>
+                        </div>
+
+                        <div class="mb-3 text-center">
+                            <label class="control-label">Ingrese peso:</label>
+                            <div class="col-xs-12 col-sm-12 col-md-4 offset-md-4 mt-3">
+                                <input class="form-control" type="text" th:field="*{peso}" required>
+                            </div>
+                        </div>
 
 
-    <div>
+                        <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('peso')}"
+                            th:errors="*{peso}"></div>
+                        <div class="text-center">
+                            <button class="btn btn-info" type="submit">Calcular</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div>
         <form th:action="@{/servicio/imc/calcular}" th:object="${imc}" method="post">
             <input type="hidden" th:field="*{usuario.id}">
             <label>Usuario:</label>
             <label th:text="${imc.usuario.nombre}"></label>
             <label th:text="${imc.usuario.estatura}"></label>
             <label>Ingrese peso</label>
-            <input th:field="*{peso}">
+            <input type="text" th:field="*{peso}" required>
+            <div class="text-danger" th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}"></div>
             <button type="submit">Calcular</button>
         </form>
         
-    </div>
+    </div> -->
 
     <footer th:replace="~{layouts/footer :: footer}"></footer>
     <div th:replace="~{layouts/script :: script}"></div>
-    
+
 </body>
+
 </html>
-
-

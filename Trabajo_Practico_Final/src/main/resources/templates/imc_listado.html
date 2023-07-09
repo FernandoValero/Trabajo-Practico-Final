@@ -7,22 +7,28 @@
     <nav th:replace="~{layouts/nav :: nav}"></nav>
 
 
-    <div>
-        <h2>IMC</h2>
-        <h3 th:text="${usuario.nombre}+' '+${usuario.apellido}"></h3>
-        <h3 th:text="${usuario.estatura}"></h3>
-        <table>
+    <div class="container">
+
+        <h2 class="text-center">Indice de Masa Corporal</h2>
+        <div class="mb-3">            
+            <h3 th:text="'Nombre y Apellido: '+ ${usuario.nombre}+' '+${usuario.apellido}"></h3>
+        </div>
+        <div class="mb-3">            
+            <h3 th:text="'Estatura: '+ ${usuario.estatura}"></h3>
+        </div>
+        <hr>
+        <table class="table table-hover">
             <thead>
-                <tr>
-                    <th>codigo</th>
-                    <th>imc</th>
-
+                <tr class="table-primary">
+                    <th scope="col">Código</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">IMC</th>
                 </tr>
-
             </thead>
             <tbody>
                 <tr th:each="imc:${listadoImc}">
                     <td th:text="${imc.id}"></td>
+                    <td th:text="${#temporals.format(imc.fechaIMC, 'dd-MM-yyyy')}"></td>
                     <td th:text="${imc.calcularIMC()}"></td>
                 </tr>
             </tbody>
