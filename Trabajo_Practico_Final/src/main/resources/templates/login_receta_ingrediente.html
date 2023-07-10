@@ -9,7 +9,7 @@
         <div class="row">
             <div class="card text-center col-xs-12 col-sm-12 col-md-4 offset-md-4 mt-3">
                 <div class="card-header">
-                    <h1 th:text="${entidad}?'Login Ingredientes.':'Login Recetas.'"></h1>
+                    <p th:text="${entidad}?'Login Ingredientes':'Login Recetas'"></p>
                 </div>
                 <div class="card-body">
                     <form th:action="${entidad}?@{/ingrediente/validacion}:@{/receta/validacion}" method="get">

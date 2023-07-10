@@ -5,3 +5,185 @@
 .fondo_nav{
 	background-color: #fefaf1;
 }
+
+/*INGREDIENTES*/
+.cuerpo_ingredientes{
+	padding: 1%;
+	border: 2px solid #313131;
+	border-radius: 10px;
+  	background: white;
+  	margin-bottom: 5%;
+}
+
+/*BOTON*/
+.agregar{
+    position: fixed;
+      bottom: 200px;
+      right: 100px;
+      background: rgb(143, 143, 143);
+      color: white;
+      border-radius: 40%;
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: -5px 1px 3px 0px rgb(248, 70, 0);
+      
+	font-size: 40px;
+
+  }
+
+.agregar:hover{
+            
+    background: #b0b0c1182187182;
+    color:rgb(255, 128, 0);
+    box-shadow:none;
+    border-radius: 10px;
+
+ }
+ 
+/*RECETAS-CATEGORIAS*/
+.footer{
+ 	clear: both;
+}
+.footer2{
+	position: fixed;
+ 	width: 100%;
+}
+.cuerpo_categorias, .cuerpo_recetas{
+	border-radius: 10px;
+  	background: white;
+}
+
+.receta, .categoria{
+	float:left;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	width: 400px;
+	height: 600px;
+	margin-right: 20px;
+	margin-top: 30px;
+	margin-left: 20px;
+	margin-bottom: 30px;
+	text-align: center;
+	background-color: rgba(167, 167, 167, 0.692);
+	border-radius: 5px;
+}
+.receta h3, .categoria h3 {
+  color: grey;
+  font-size: 18px;
+}
+.receta p, .categoria p{
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+.receta img, .categoria img{
+	width:100%;
+	width:400px;
+	height:300px;
+	border-radius: 5px;
+}
+.categoria img:hover{
+	transform:scale(0.9);
+	border-radius: 30px;
+}
+.receta img:hover{
+	transform:scale(0.9);
+	border-radius: 30px;
+}
+
+/*CSS INFORMACION DE RECETA*/
+.cuerpo_info{
+	background-color: rgba(167, 167, 167, 0.692);
+	border-radius: 5px;
+}
+
+
+.info2{
+	float:left;
+}
+.titulo_preparacion{
+	font-size: 20px;
+  	color: grey;
+	text-align:right;
+}
+.preparacion{
+	text-align:right;
+}
+.titulo_ingrediente{
+  font-size: 20px;
+  color: grey;
+}
+.info h3 {
+  color: grey;
+}
+
+.info img{
+	width:400px;
+	height:300px;
+	border-radius: 5px;
+}
+
+/* TESTIMONIO */
+.comentario{
+	max-width: 18rem;
+	margin: 1%;
+	padding: 0%;
+}
+.boton-testimonio{
+	padding-left: 75%;
+	font-size: 25px;
+}
+.pie-pagina{
+	background-color: #fefaf1;
+	position: relative;
+  	bottom: -200px;
+ 	width: 100%;
+}
+.testimonio{
+	min-height: 50vh;
+}
+
+/*Tabla/ /Usuarios*/
+.tabla{
+	font-family: Arial;
+	margin: 150px auto;
+	width: 600px;
+	background-color: white;
+	text-align: left;
+	border-collapse: collapse;
+	width: 100%
+}
+th, td{
+	border: solid 1px black;
+	padding: 20px;
+}
+th{
+	background-color: #f7810b;
+	border-bottom: solid 5px #35AAF7;
+	color: white;
+}
+tr:nth-child(odd){
+	background-color: #ddd;
+}
+tr:hover td{
+	background-color: #5DD8F7;
+	color: white;
+}
+/*Imagenes Centro*/
+.centro {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+	border-style: solid;
+	transition: all 0.5s ease;
+	border-style: solid;
+	border-color: black;
+}
+img:hover{
+	transform:scale(0.9);
+	border-radius: 30px;
+}
+*{
+	box-sizing: border-box;
+}

@@ -66,6 +66,18 @@ public class RecetasController {
 	
 	
 	/**
+	 * Método para obtener las recetas de la BD segun si id y agregarlas al modelo.
+	 * Devuelve la página "recetas.html" para mostrar su informacion.
+	 */
+	@GetMapping("/info/{id}")
+	public String getInfoRecetaPage(Model model, @PathVariable(value="id" ) Long id) {
+		Receta recetaEncontrada = recetaService.getBy(id);
+		model.addAttribute("receta", recetaEncontrada);
+		return "informacion_receta";
+	}
+	
+	
+	/**
 	 * Método para obtener las recetas de la BD segun una categoria y agregarlas al modelo.
 	 * Devuelve la página "recetas.html".
 	 */

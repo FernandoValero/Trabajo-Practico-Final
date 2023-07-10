@@ -5,9 +5,9 @@
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
 		<header class="encabezado container-sm">
 			<div class="row">
-				<div class="col-3"></div>
-				<h1 class="titulo display-4 col-6">Nuevo</h1>
-				<div class="col-3"></div>
+				<div class="col-5"></div>
+				<h1 class="titulo col-6">Nuevo</h1>
+				<div class="col-5"></div>
 			</div>
 		</header>
 		<form class="container formulario" th:action="${edicion}?@{/receta/editar}:@{/receta/guardar}" th:object="${receta}" method="post">
@@ -20,13 +20,13 @@
 			<br>
 			 
 			<div class="mb-3">
-				<label class="form-label">Nombre: <i class="fa-solid fa-clock"></i></label>
+				<label class="form-label">Nombre: </label>
 				<input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Ingresa el nombre de la receta" >
 				<div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 			</div> 
 					
 			<div class="mb-3">
-				<label class="form-label" for="image">Categoría: <i class="fa-regular fa-image"></i></label>
+				<label class="form-label" for="image">Categoría: </label>
 				<select id="categoria" class="form-select"  th:field="*{categoria}">
 					<option value="" selected>Seleccione una categoría...</option>
 					<option value="Recetas de Carnes">Recetas de Carnes</option>
@@ -52,7 +52,7 @@
 			</div>
 			
 			<div class="mb-3">
-				<label class="form-label" for="image">Imagen:<i class="fa-regular fa-image"></i></label>
+				<label class="form-label" for="image">Imagen:</i></label>
 				<select class="form-select" th:field="*{imagen}" required="required">
 				    <option value="RecetaCarne1.jpg">Receta de Carne 1</option>
 				    <option value="RecetaCarne2.jpg">Receta de Carne 2</option>
@@ -74,7 +74,7 @@
 			</div> 
 			
 			<div class="mb-3">
-				<label class="form-label" for="preparacion">Preparación:<i class="fa-solid fa-street-view"></i></label>
+				<label class="form-label" for="preparacion">Preparación:</i></label>
 				<input class="form-control" type="text" id="preparacion" name="preparacion_receta" th:field="*{preparacion}" placeholder="Ingresa la preparación de la receta">
 				<div class="text-danger" th:if="${#fields.hasErrors('preparacion')}" th:errors="*{preparacion}"></div>
 			</div>

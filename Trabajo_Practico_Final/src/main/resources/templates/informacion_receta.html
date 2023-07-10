@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head th:replace="~{/layouts/head :: head}"></head>
+	<body>
+		<nav th:replace="~{layouts/nav :: nav}" ></nav>
+		<header class="encabezado container-sm">
+				<div class="row">
+					<div class="col-5"></div>
+					<h1 class="titulo col-6">Información</h1>
+					<div class="col-5"></div>
+				</div>
+		</header>
+			<div class="container cuerpo_info" style="min-height: 70vh;">	
+				<div class="container info">
+					<div class="info2">
+						<img th:src="@{/images/}+${receta.imagen}" alt="Imagen de receta"  >			
+						<h3 th:text="${receta.nombre}"></h3>
+						<p class="titulo_ingrediente">Ingredientes</p>
+						<ul>
+					        <li th:each="ingrediente: ${receta.ingredientes}">
+					            <p th:text="${ingrediente.nombre}"></p>
+					        </li>
+					    </ul>
+				    </div>
+				    <div class="info2">
+					    <div class="titulo_preparacion">
+					    	<p class="titulo_preparacion">Preparación</p>
+						</div>
+						<div class="preparacion">
+					    	<p th:text="${receta.preparacion}"></p>
+						</div>
+							 
+					</div>
+				</div>	
+		</div>
+		<div th:if="${gestion}">
+			<a th:href="@{/receta/nuevo}" class="agregar"><i class=" fa-solid fa-circle-plus"></i></a>
+		</div>
+		<div class="footer" >
+			<footer  th:replace="~{layouts/footer :: footer}"></footer>
+		</div>
+		<div th:replace="~{layouts/script :: script}"></div>
+	</body>
+</html>
