@@ -5,31 +5,43 @@
 </head>
 <body>
 	<nav th:replace="~{layouts/nav :: nav}"></nav>
-	<form class="container" th:action="${edicion}?@{/testimonio/modificar}:@{/testimonio/guardar}" th:object="${testimonio}" method="post">	
-		<br>
-		<div class="mb-3" th:if="${edicion}">
-			<input class="form-control" type="hidden" th:field="*{id}">
-		</div>
-		<div class="mb-3" th:if="${edicion}">
-			<input class="form-control" type="hidden" th:field="*{estado}">
-		</div>
-		<div class="mb-3" th:if="${edicion}">
-			<input class="form-control" type="hidden" th:field="*{fecha}">
-		</div>
-		<div class="mb-3">
-			<div th:text="*{usuario.nombre}"></div>
-			<input class="form-control" type="hidden" th:field="*{usuario}">
-		</div>
-		<div class="mb-3">
-			<label class="form-label" for="nombre">Comentario:<i class="fa-solid fa-house"></i></label>
-			<input class="form-control" th:field="*{comentario}" placeholder="Danos tu opinión aquí"></input>
-			<div class="text-danger" th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></div>
-		</div>
-		<input class="btn btn-success" type="submit" th:value="${edicion}?'Guardar Cambios':'Guardar'">
-		<a th:href="@{/testimonio/listado}" class="btn btn-secondary" role="button" aria-disabled="true">Cancelar</a>
-		<br>
-		<br>
-	</form>
+	<div class="container" style="min-height: 60vh;">
+        <div class="row">
+            <div class="card text-center col-xs-12 col-sm-12 col-md-4 offset-md-4 mt-3">
+                <div class="card-header">
+                    Comenta cosas bonitas
+                </div>
+                <div class="card-body">
+                    <form class="container" th:action="${edicion}?@{/testimonio/modificar}:@{/testimonio/guardar}" th:object="${testimonio}" method="post">	
+						<br>
+						<div class="mb-3" th:if="${edicion}">
+							<input class="form-control" type="hidden" th:field="*{id}">
+						</div>
+						<div class="mb-3" th:if="${edicion}">
+							<input class="form-control" type="hidden" th:field="*{estado}">
+						</div>
+						<div class="mb-3" th:if="${edicion}">
+							<input class="form-control" type="hidden" th:field="*{fecha}">
+						</div>
+						<div class="mb-3">
+							<div> <span  th:text="*{usuario.nombre}"></span> <span th:text="*{usuario.apellido}"></span> </div>
+							<input class="form-control" type="hidden" th:field="*{usuario}">
+						</div>
+						<div class="mb-3">
+							<label class="form-label" for="nombre">Comentario <i class="fa-regular fa-comment"></i></label>
+							<textarea class="form-control" th:field="*{comentario}" placeholder="Déjanos tu opinión aquí"></textarea>
+							<div class="text-danger" th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></div>
+						</div>
+						<input class="btn btn-info mt-3 mb-3" type="submit" th:value="${edicion}?'Guardar Cambios':'Guardar'">
+						<a th:href="@{/testimonio/listado/0}" class="btn btn-secondary" role="button" aria-disabled="true">Cancelar</a>
+						<br>
+						<br>
+					</form>
+                </div>
+            </div>
+        </div>
+    </div>
+	
 	<footer th:replace="~{layouts/footer :: footer}"></footer>
 	<div th:replace="~{layouts/script :: script}"></div>
 </body>
