@@ -5,6 +5,7 @@
 </head>
 <body>
 	<nav th:replace="~{layouts/nav :: nav}"></nav>
+	<div class="alert alert-danger" role="alert" th:if="${!existeUsuario}">Usuario inexistente</div>
 	<div th:each="testimonio : ${testimonios}" class="card border-primary mb-3" style="max-width: 18rem;">
     	<div class="card-header text-primary"><i class="fa-regular fa-circle-user"> <span th:text="${testimonio.usuario.nombre}"></span> <span th:text="${testimonio.usuario.apellido}"></span></i></div>
     	<div class="card-body text-primary">

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{layouts/head :: head}">
+	<title>Validar su Usuario</title>
+</head>
+<body>
+	<nav th:replace="~{layouts/nav :: nav}"></nav>
+	<div class="container" style="min-height: 60vh;">
+        <div class="row">
+            <div class="card text-center col-xs-12 col-sm-12 col-md-4 offset-md-4 mt-3">
+                <div class="card-header">
+                    Login Acceso - Testimonio.
+                </div>
+                <div class="card-body">
+                    <form class="container" th:action="@{/testimonio/validar}" method="post">
+                    	<h5 class="card-title">Ingrese Identificador de Usuario:</h5>	
+				    	<input type="hidden" name="accion" th:value="${accion}">
+				    	<input type="hidden" name="user" th:value="${user}">
+				    	<input class="form-control" type="number" name="clave" placeholder="Ingrese su contraseña" required> 	
+				    	<input class="btn btn-info mt-3 mb-3" type="submit" value="Validar">
+					</form>
+                </div>
+            </div>
+        </div>
+    </div>
+	<footer th:replace="~{layouts/footer :: footer}"></footer>
+	<div th:replace="~{layouts/script :: script}"></div>
+</body>
+</html>

@@ -34,25 +34,26 @@ public class TestimonioController {
 	* @return vista "testimonios".
 	*/
 	@GetMapping("/listado/{vista}")
-	public String getTestimonioPage(@PathVariable(value="vista")int vista,Model model) {
-		if (vista==1) {
-			model.addAttribute("vista", true);
-		}
-		else {
-			model.addAttribute("vista", false);
-		}
-		model.addAttribute("testimonios", testimonioService.getLista());
-		return "testimonios";
+	public ModelAndView getTestimonioPage(@PathVariable(value="vista")int vista) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.addObject("existeUsuario",true);
+		if (vista==1) 
+			modelAndView.addObject("vista",true);
+		else
+			modelAndView.addObject("vista", false);
+		modelAndView.addObject("testimonios", testimonioService.getLista());
+		modelAndView.setViewName("testimonios");
+		return modelAndView;
 	}
 	/**
 	* Método que obtiene formulario de validación de usuario administrador.
 	* @return vista "testimonios_accion".
 	*/
 	@GetMapping("/verificar")
-	public String getIngresoUsuarioAnminPage(Model model) {
+	public String getIngresoUsuarioAdminPage(Model model) {
 		model.addAttribute("user", true);
 		model.addAttribute("accion", 1);
-		return "testimonio_accion";
+		return "login_testimonio";
 	}
 	/**
 	* Método que obtiene formulario de validación de usuario común.
@@ -62,23 +63,25 @@ public class TestimonioController {
 	public String getIngresoUsuarioPage(@PathVariable(value="accion")Long accion, Model model) {
 		model.addAttribute("accion", accion);
 		model.addAttribute("user", false);
-		return "testimonio_accion";
+		return "login_testimonio";
 	}
 	/**
 	* Método valida al usuario a realizar acciones.
 	* @return ModelAndView con la vista: según el acción y usuario.
 	*/
 	@PostMapping("/validar")
-	public ModelAndView getIngresarFormularioTestimonioPage(@RequestParam(name="clave") Long clave,@RequestParam(name="accion") Long accion, @RequestParam(name="user") boolean user) {
+	public ModelAndView getIngresarFormularioTestimonioPage(Model model,@RequestParam(name="clave") Long clave,@RequestParam(name="accion") Long accion, @RequestParam(name="user") boolean user) {
+		//accion: determina la acción según el id - negativo =borrar;positivo=modificar;cero=guardar
 		ModelAndView modelAndView = new ModelAndView();
 		Usuario usuarioEncontrado = usuarioService.getBy(clave);
-		//accion: determina la acción según el id
 		if(usuarioEncontrado!=null) {
 			if(user) {
 				if(usuarioEncontrado.isAdmin())
 					modelAndView.setViewName("redirect:/testimonio/listado/1");
-				else 
-					modelAndView.setViewName("redirect:/testimonio/listado/0");
+				else {
+					modelAndView.addObject("existeUsuario", false);
+					modelAndView.setViewName("testimonios");
+				}
 			}
 			else {
 				if(accion == 0) {
@@ -93,21 +96,28 @@ public class TestimonioController {
 							modelAndView.addObject("id", accion);
 							modelAndView.setViewName("redirect:/testimonio/modificar/{id}");
 						}
-						else 
-							modelAndView.setViewName("redirect:/testimonio/listado/0");
+						else {
+							modelAndView.addObject("existeUsuario", false);
+							modelAndView.setViewName("testimonios");
+						}
 					}
 					else {
 						Testimonio testimonioEncontrado = testimonioService.getBy(accion*-1);
-						if(usuarioEncontrado.isAdmin() ||usuarioEncontrado.getId()==testimonioEncontrado.getUsuario().getId())
-							modelAndView.setViewName("redirect:/testimonio/eliminar/{accion}");
-						else 
-							modelAndView.setViewName("redirect:/testimonio/listado/0");
+						if(usuarioEncontrado.isAdmin() || usuarioEncontrado.getId()==testimonioEncontrado.getUsuario().getId()) {
+							modelAndView.addObject("id", accion);
+							modelAndView.setViewName("redirect:/testimonio/eliminar/{id}");
+						}
+						else {
+							modelAndView.addObject("existeUsuario", false);
+							modelAndView.setViewName("testimonios");
+						}
 					}
 				}
 			}
 		}
 		else {
-			modelAndView.setViewName("redirect:/testimonio/listado/0");
+			modelAndView.addObject("existeUsuario", false);
+			modelAndView.setViewName("testimonios");
 		}
 		return modelAndView;
 	}
@@ -130,7 +140,8 @@ public class TestimonioController {
 	*/
 	@PostMapping("/guardar")
 	public ModelAndView guardarTestimonio(@Valid @ModelAttribute("testimonio")Testimonio testimonio, BindingResult result) {
-		ModelAndView modelAndView = new ModelAndView("testimonios");
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/testimonio/listado/0");
 		if(result.hasErrors()) {
 			modelAndView.setViewName("nuevo_testimonio");
 			modelAndView.addObject("testimonio", testimonio);
