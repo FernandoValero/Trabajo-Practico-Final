@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta charset="ISO-8859-1">
+<title>Usuarios</title>
+	<link th:href="@{/css/estilos.css}" rel="stylesheet">
+	<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+	<nav th:replace="~{layouts/nav :: nav}"></nav>
+	<table>
+	<tr>
+		<th>Id:</th>
+		<th>Nombre:</th>
+		<th>Apellido:</th>
+		<th>E-mail:</th>
+		<th>Fecha de Nacimiento:</th>
+		<th>Telefono</th>
+		<th>Sexo:</th>
+		<th>Estatura:</th>
+		<th>Acciones</th>
+	</tr>
+	<tr th:each="usu: ${usuarios}">
+		<td th:text="${usu.id}"></td>
+		<td th:text="${usu.nombre}"></td>
+		<td th:text="${usu.apellido}"></td>
+		<td th:text="${usu.email}"></td>
+		<td th:text="${usu.fechaNacimiento}"></td>
+		<td th:text="${usu.telefono}"></td>
+		<td th:text="${usu.sexo}"></td>
+		<td th:text="${usu.estatura}"></td>
+		<td><a th:href="@{/usuario/editar/}+${usu.id}"><i class="editar-usuario fa-regular fa-pen-to-square"></i></a>
+			<a th:href="@{/usuario/eliminar/}+${usu.id}"><i class="eliminar-usuario fa-solid fa-trash-can"></i></a></td>
+	</tr>
+	</table>
+	<footer th:replace="~{layouts/footer :: footer}"></footer>
+	<div th:replace="~{layouts/script :: script}"></div>
+	<script src="https://kit.fontawesome.com/f80946207f.js"></script>
+</body>
+</html>
