@@ -13,6 +13,11 @@ public interface IRecetaService {
 	List<Receta> getListaReceta();
 	
 	/**
+	 *Devuelve la lista de Recetas
+	 */
+	List<Receta> getListaRecetaCategoria(String categoria);
+	
+	/**
 	 *Metodo que permite guardar una receta
 	 *@param receta, valor a guardar
 	 */

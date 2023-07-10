@@ -14,18 +14,18 @@
 		<table class="table caption-top">
 		<tr>
 			<th scope="col" class="text-dark"><strong>Nombre</strong></th>
-			<th scope="col" class="text-dark"><strong>Acciones</strong></th>
+			<th scope="col" class="text-dark"><strong>Eliminar</strong></th>
 			
 		</tr>
 		 <tr th:each="lista_ingredientes: ${ingredientes}">
 			
 			<td th:text="${lista_ingredientes.nombre}"></td> 
-			<!--  <td><a th:href="@{/ingrediente/eliminar/}+${lista_ingredientes.id}"></a></td>-->
+		   <td><a th:href="@{/ingrediente/eliminar/}+${lista_ingredientes.id}"><i class="eliminar-servicio fa-solid fa-trash-can"></i></a></td>
 		</tr>
 		</table>
 	</div>
 	<div class="guardar">
-		<a th:href="@{/servicio/nuevo}"><i class="agregar fa-solid fa-circle-plus"></i></a>
+		<a th:href="@{/ingrediente/nuevo}"><i class="agregar fa-solid fa-circle-plus"></i></a>
 	</div>
 	<footer th:replace="~{layouts/footer :: footer}"></footer>
 		<div th:replace="~{layouts/script :: script}"></div>

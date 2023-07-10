@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Receta;
+import ar.edu.unju.fi.service.IIngredienteService;
 import ar.edu.unju.fi.service.IRecetaService;
 import jakarta.validation.Valid;
 
@@ -23,25 +24,64 @@ public class RecetasController {
 	@Autowired
 	@Qualifier("recetaServiceMysql")
 	private IRecetaService recetaService;
+	@Autowired
+	private IIngredienteService ingredienteService;
+	
+	
+	/**
+	 * Método para obtener las recetas de la BD segun una categoria y agregarlas al modelo.
+	 * Devuelve la página "recetas.html".
+	 */
+	@GetMapping("/validacion")
+	public String getValidacionRecetasPage() {
+		
+		return "";
+	}
+	
+	
+	/**
+	 * Método para obtener las recetas de la BD segun una categoria y agregarlas al modelo.
+	 * Devuelve la página "recetas.html".
+	 */
+	@GetMapping("/recetas/{categoria}")
+	public String getListaRecetasPage(Model model, @PathVariable(value="categoria" ) String categoria) {
+		model.addAttribute("recetas",recetaService.getListaRecetaCategoria(categoria));
+		return "recetas";
+	}
+	
+	/**
+	 * Método para obtener las recetas de la BD segun una categoria y agregarlas al modelo.
+	 * Devuelve la página "recetas.html".
+	 */
+	@GetMapping("/gestion")
+	public String getListaAllRecetasPage(Model model) {
+		boolean gestion=true;
+		model.addAttribute("recetas",recetaService.getListaReceta());
+		model.addAttribute("gestion", gestion);
+		return "recetas";
+	}
+	
 	
 	/**
 	 * Método para obtener las recetas de la BD y agregarlas al modelo.
 	 * Devuelve la página "recetas.html".
 	 */
-	@GetMapping("/recetas")
-	public String getListaRecetasPage(Model model) {
+	@GetMapping("/categorias")
+	public String getListaRecetasCategoriaPage(Model model) {
 		model.addAttribute("recetas",recetaService.getListaReceta());
-		return "recetas";
+		return "recetas_categoria";
 	}
+	
 	
 	
 	/* 
 	 * Método para obtener la página de creación de una nueva receta.
 	 * Devuelve la página "nueva_receta".
-	 */
+     */
 	@GetMapping("/nuevo")
 	public String getNuevaRecetaPage(Model model) {
 		boolean edicion=false;
+		model.addAttribute("ingredientes",ingredienteService.getListaIngrediente());
 		model.addAttribute("receta", recetaService.getReceta());
 		model.addAttribute("edicion", edicion);
 		return "nueva_receta";
@@ -56,11 +96,11 @@ public class RecetasController {
 	 * Devuelve el objeto ModelAndView.
 	 */
 	@PostMapping("/guardar")
-	public ModelAndView getGuardarRecetaPage(@Valid @ModelAttribute("receta")Receta receta, BindingResult result) {
+	public ModelAndView getGuardarRecetaPage(@Valid @ModelAttribute("receta") Receta receta, BindingResult result) {
 		ModelAndView modelView = new ModelAndView("recetas");
 		if(result.hasErrors()) {
-			modelView.setViewName("nueva_receta") ;
-			modelView.addObject("receta", receta);
+			 modelView.addObject("ingredientes",ingredienteService.getListaIngrediente());
+			modelView.setViewName("nueva_receta");
 			return modelView;
 		}
 		recetaService.guardar(receta);
@@ -79,6 +119,7 @@ public class RecetasController {
 	public String getEditarRecetaPage(Model model, @PathVariable(value="id") Long id) {
 		boolean edicion=true;
 		Receta recetaEncontrada = recetaService.getBy(id);
+		model.addAttribute("ingredientes",ingredienteService.getListaIngrediente());
 		model.addAttribute("receta", recetaEncontrada);
 		model.addAttribute("edicion", edicion);
 		return "nueva_receta";
@@ -95,10 +136,11 @@ public class RecetasController {
 	public String editarReceta(@Valid @ModelAttribute("receta")Receta receta, BindingResult result,Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("edicion", true);
+			model.addAttribute("ingredientes",ingredienteService.getListaIngrediente());
 			return "nueva_receta";
 		}
 		recetaService.editar(receta);
-		return "redirect:/receta/recetas";
+		return "redirect:/receta/gestion";
 	}
 
 	
@@ -112,6 +154,6 @@ public class RecetasController {
 	public String EliminarReceta(@PathVariable(value="id") Long id) {
 		Receta recetaEncontrada= recetaService.getBy(id);
 		recetaService.eliminar(recetaEncontrada);
-		return "redirect:/receta/recetas";
+		return "redirect:/receta/gestion";
 	}
 }

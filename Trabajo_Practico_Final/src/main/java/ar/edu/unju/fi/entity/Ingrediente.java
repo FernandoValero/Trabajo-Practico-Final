@@ -24,7 +24,7 @@ public class Ingrediente {
 
     @Column(name = "nombre")
     @NotEmpty(message = "*Debe agregar el nombre")
-    @Size(min = 4, message = "*Nombre muy corto")
+    @Size(min = 2, message = "*Nombre muy corto")
     private String nombre;
 
     @ManyToMany(mappedBy = "ingredientes")
@@ -36,12 +36,13 @@ public class Ingrediente {
     public Ingrediente() {
     }
 
-    public Ingrediente(Long id, String nombre) {
+    public Ingrediente(Long id, String nombre,boolean estado) {
         this.id = id;
         this.nombre = nombre;
+        this.estado = estado;
     }
 
-    public Long get() {
+    public Long getId() {
         return id;
     }
 

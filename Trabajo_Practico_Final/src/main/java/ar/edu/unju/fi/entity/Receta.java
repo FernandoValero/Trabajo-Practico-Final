@@ -47,6 +47,8 @@ public class Receta {
 	 */
 	private Long id;
 	
+	
+	@NotEmpty(message="*Debe seleccionar al menos un ingrediente")
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
     		name = "receta_ingrediente",
@@ -57,20 +59,19 @@ public class Receta {
 	
 	@Column(name="nombre_receta")
 	@NotEmpty(message="*Nombre vacío")
-	@Size(min=4,message="*Nombre muy corto")
 	private String nombre;
 	
 	@Column(name="categoria_receta")
-	@NotEmpty(message="*Categoria vacía")
+	@NotEmpty(message="*Debe seleccionar una categoria")
 	private String categoria;
-	
+	/*
 	@Column(name="ingrediente_receta")
 	@NotEmpty(message="*Ingrediente vacío")
 	private String ingrediente;
-	
+	*/
 	@Column(name="preparacion_receta")
-	@Size(min=10,message="*Preparacion muy corto")
-	@NotEmpty(message="*Preparacion vacío")
+	@Size(min=10,message="*La preparación debe ser mas detallada")
+	@NotEmpty(message="*La preparacion no debe estar vacía")
 	private String preparacion;
 	
 	@Column(name="imagen_receta")
@@ -97,12 +98,15 @@ public class Receta {
 	 *@param imagen, imagen a asignar para la Receta
 	 *@param estado, valor a asignar al  Estado de la Receta
 	 */
-	public Receta(Long id, String nombre, String categoria, String ingrediente, String preparacion, String imagen, boolean estado) {
+	
+	
+	
+	public Receta(Long id, String nombre, String categoria, List<Ingrediente> ingredientes, String preparacion, String imagen, boolean estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.categoria = categoria;
-		this.ingrediente = ingrediente;
+		this.ingredientes = ingredientes;
 		this.preparacion = preparacion;
 		this.imagen = imagen;
 		this.estado = estado;
@@ -160,14 +164,14 @@ public class Receta {
 	/**
 	 * Permite la salida del ingrediente
 	 @return retorna el ingrediente de la receta
-	 */
+	 *//*
 	public String getIngrediente() {
 		return ingrediente;
 	}
 	/**
 	 * Permite la entrada del atributo ingrediente
 	 * @param ingrediente, valor a asignar al ingrediente de la receta
-	 */
+	 *//*
 	public void setIngrediente(String ingrediente) {
 		this.ingrediente = ingrediente;
 	}
