@@ -80,6 +80,7 @@ public class TestimonioController {
 					modelAndView.setViewName("redirect:/testimonio/listado/1");
 				else {
 					modelAndView.addObject("existeUsuario", false);
+					modelAndView.addObject("testimonios", testimonioService.getLista());
 					modelAndView.setViewName("testimonios");
 				}
 			}
@@ -98,6 +99,7 @@ public class TestimonioController {
 						}
 						else {
 							modelAndView.addObject("existeUsuario", false);
+							modelAndView.addObject("testimonios", testimonioService.getLista());
 							modelAndView.setViewName("testimonios");
 						}
 					}
@@ -109,6 +111,7 @@ public class TestimonioController {
 						}
 						else {
 							modelAndView.addObject("existeUsuario", false);
+							modelAndView.addObject("testimonios", testimonioService.getLista());
 							modelAndView.setViewName("testimonios");
 						}
 					}
@@ -117,6 +120,7 @@ public class TestimonioController {
 		}
 		else {
 			modelAndView.addObject("existeUsuario", false);
+			modelAndView.addObject("testimonios", testimonioService.getLista());
 			modelAndView.setViewName("testimonios");
 		}
 		return modelAndView;
