@@ -10,20 +10,22 @@
 					<div class="col-5"></div>
 				</div>
 		</header>
-			<div class="cuerpo_recetas" th:if="!${#lists.isEmpty(recetas)}" >
-			<div class="recetas" style="min-height: 70vh;">	
-				<div class="receta"  th:each="lista_recetas: ${recetas}"  >
-					<a th:href="@{/receta/info/}+${lista_recetas.id}"><img th:src="@{/images/}+${lista_recetas.imagen}" alt="Imagen de receta"  ></a>
-					<div class="mb-3" th:if="${gestion}">
-						<a th:href="@{/receta/editar/}+${lista_recetas.id}"><i class="editar-sucu fa-regular fa-pen-to-square"></i></a>
-						<a th:href="@{/receta/eliminar/}+${lista_recetas.id}"><i class="eliminar-sucu fa-solid fa-trash-can"></i></a>
+		<div class="formulario_receta_ingrediente">
+			<div class="cuerpo_recetas " th:if="!${#lists.isEmpty(recetas)}" >
+				<div class="recetas" style="min-height: 70vh;">	
+					<div class="receta"  th:each="lista_recetas: ${recetas}"  >
+						<a th:href="@{/receta/info/}+${lista_recetas.id}"><img th:src="@{/images/}+${lista_recetas.imagen}" alt="Imagen de receta"  ></a>
+						<div class="mb-3" th:if="${gestion}">
+							<a th:href="@{/receta/editar/}+${lista_recetas.id}"><i class="editar-sucu fa-regular fa-pen-to-square"></i></a>
+							<a th:href="@{/receta/eliminar/}+${lista_recetas.id}"><i class="eliminar-sucu fa-solid fa-trash-can"></i></a>
+						</div>
+						
+						<p th:if="${gestion}" th:text="${lista_recetas.categoria}"></p>
+						<h3  th:text="${lista_recetas.nombre}"></h3>
+						
 					</div>
-					
-					<p th:if="${gestion}" th:text="${lista_recetas.categoria}"></p>
-					<h3  th:text="${lista_recetas.nombre}"></h3>
-					
-				</div>
-		</div>	
+				</div>	
+			</div>
 		</div>
 		<div th:if="${gestion}">
 			<a th:href="@{/receta/nuevo}" class="agregar"><i class=" fa-solid fa-circle-plus"></i></a>

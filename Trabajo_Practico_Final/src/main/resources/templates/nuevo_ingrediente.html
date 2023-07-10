@@ -10,7 +10,7 @@
 				<div class="col-5"></div>
 			</div>
 		</header>
-		<form class="container formulario" th:action="${edicion}?@{/ingrediente/editar}:@{/ingrediente/guardar}" th:object="${ingrediente}" method="post">
+		<form class="container formulario_receta_ingrediente" th:action="${edicion}?@{/ingrediente/editar}:@{/ingrediente/guardar}" th:object="${ingrediente}" method="post">
 			 <div class="mb-3" th:if="${edicion}">
 				<input class="form-control" type="hidden" th:field="*{id}" readonly="readonly">
 			</div>
