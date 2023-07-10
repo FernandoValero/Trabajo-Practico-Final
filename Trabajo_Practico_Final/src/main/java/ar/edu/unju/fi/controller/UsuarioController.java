@@ -18,7 +18,11 @@ public class UsuarioController {
 
 	@Autowired
 	private IUsuarioService usuarioService;
-	
+	/**
+	* Método que obtiene una vista para que el usuario ingrese su id
+	* para poder ingresar a la parte de gestion de datos de Usuario.
+	* @return vista "usuarioLogin".
+	*/
 	@GetMapping("/usuarios")
 	public String getUsuarioPage(Model model) {
 		model.addAttribute("titulo", "Login");
@@ -26,30 +30,37 @@ public class UsuarioController {
 		return "usuarioLogin";
 		
 	}
+	
+	/**
+	* Método que obtiene el listado de los usuarios, solamente para los admin.
+	* y lista solamente los usarios que no son admin.
+	* @return vista "usuarios".
+	* Metodo que reenvia al usuario si no es admin.
+	* @return vista "usuarioLogin".
+	*/
 	@GetMapping("/validar")
 	public String buscarUsuarioAdmin(@RequestParam(value = "id") Long id, Model model) {
 		Usuario usuarioBuscado = usuarioService.getByIdAndAdmin(id, true);
 		if (usuarioBuscado != null) {
-			model.addAttribute("usuario", usuarioService.getLista());
+			model.addAttribute("listado", usuarioService.getByEstadoAndAdmin(true, false));
 			return "usuarios";
 		} else {
 			model.addAttribute("existeUsuario", false);
 			model.addAttribute("titulo", "Login Gestión");
 			return "usuarioLogin";
 		}
+	
 	}
-
-	@GetMapping("/listado/{admin}")
-	public String getUsuarioPage(@PathVariable(value="admin")String admin, Model model) {
-		boolean accion = admin.equals("admin");
-		model.addAttribute("accion", accion);
-		model.addAttribute("usuarios", usuarioService.getLista());
-		return "usuarios";
-	}
-	@GetMapping("/gestion/eliminar/{id}")
-	public String EliminarUsuario(@PathVariable(value = "id") Long id) {
+	
+	/**
+	* Método que elimina un usuario comun, por su {id}.
+	* @return vista "usuarios".
+	*/
+	@GetMapping("/eliminar/{id}")
+	public String EliminarUsuario(@PathVariable(value = "id") Long id, Model model) {
 		Usuario usuarioEncontrado = usuarioService.getBy(id);
 		usuarioService.eliminar(usuarioEncontrado);
-		return "redirect:/usuario/usuarios";
+		model.addAttribute("listado", usuarioService.getByEstadoAndAdmin(true, false));
+		return "usuarios";
 	}
 }
