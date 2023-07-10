@@ -2,50 +2,46 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" th:href="@{/css/estilos.css}">
 </head>
 <body>
-	<footer th:fragment="footer" class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+	<footer th:fragment="footer" class="pie-pagina row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
 	    <div class="col mb-3">
 	      <a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-	        <span class="text-warning"><img class="logo"  th:src="@{/images/logo.png}" alt="logo mascota" title="Logo tienda de mascotas"></span>
+	        <img class="rounded float-start"  th:src="@{/images/logo.png}" alt="logo" title="Logo tienda">
 	      </a>
-	      <p class="text-muted">© 2023</p>
+	      <p class="text-muted">© 2023 Copyright - <span class="text-reset fw-bold">Salud.com</span></p>
 	    </div>
-	
 	    <div class="col mb-3">
 	
 	    </div>
 	
 	    <div class="col mb-3">
-	      <h5>Section</h5>
+	      <h5 class="text-reset fw-bold">Opciones</h5>
 	      <ul class="nav flex-column">
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+			<li class="nav-item mb-2"><a class="nav-link p-0 text-dark" th:href="@{/index}">Inicio</a></li>
+	        <li class="nav-item mb-2"><a class="nav-link p-0 text-dark" th:href="@{/receta/categorias}">Recetas</a></li>
+	        <li class="nav-item mb-2"><a class="nav-link p-0 text-dark" th:href="@{/testimonio/listado/{vista}(vista=${0})}">Testimonios</a></li>
+	        <li class="nav-item mb-2"><a class="nav-link p-0 text-dark" th:href="@{/contactanos}">Contactanos</a></li>
 	      </ul>
 	    </div>
 	
 	    <div class="col mb-3">
-	      <h5>Section</h5>
+	      <h5 class="text-reset fw-bold">Redes Sociales</h5>
 	      <ul class="nav flex-column">
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+	      	<li class="nav-item mb-2"><a href="https://www.linkedin.com/" class="nav-link p-0 text-dark"><i class="fa-brands fa-linkedin"></i> <span>Linkedin</span></a></li>	       
+	        <li class="nav-item mb-2"><a href="https://www.facebook.com/" class="nav-link p-0 text-dark"><i class="fa-brands fa-facebook"></i> <span>Facebook</span></a></li>
+	        <li class="nav-item mb-2"><a href="https://www.instagram.com/" class="nav-link p-0 text-dark"><i class="fa-brands fa-instagram"></i> <span>Instagram</span></a></li>
+	        <li class="nav-item mb-2"><a href="https://www.twitter.com/" class="nav-link p-0 text-dark"><i class="fa-brands fa-twitter"></i> <span>Twitter</span></a></li>
 	      </ul>
 	    </div>
-	
 	    <div class="col mb-3">
-	      <h5>Section</h5>
+	      <h5 class="text-reset fw-bold">Contacto</h5>
 	      <ul class="nav flex-column">
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"><i class="fa-solid fa-house"></i> <span>Alberdi 508 - S.S. Jujuy</span></a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"><i class="fa-solid fa-envelope"></i> <span>salud@salud.com</span></a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"><i class="fa-solid fa-phone"></i> <span>387 464 4546</span></a></li>
+	        <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"><i class="fa-solid fa-phone"></i> <span>388 454 4778</span></a></li>
 	      </ul>
 	    </div>
 	</footer>
