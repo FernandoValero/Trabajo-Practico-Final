@@ -29,6 +29,15 @@ public class RecetaServiceMysqlImp implements IRecetaService {
 		
 		return recetaRepository.findByEstado(true);
 	}
+	
+	/**
+	 *Método para obtener la lista de Recetas.
+	 *Devuelve las recetas.
+	 */
+	@Override
+	public List<Receta> getListaRecetaCategoria(String categoria) {
+	     return recetaRepository.findByEstadoAndCategoria(true, categoria);
+	}
 
 	
 	/*

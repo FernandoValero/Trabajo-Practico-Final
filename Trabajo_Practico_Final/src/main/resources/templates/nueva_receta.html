@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head th:replace="~{/layouts/head :: head}"></head>
+	<body>
+		<nav th:replace="~{layouts/nav :: nav}"></nav>
+		<header class="encabezado container-sm">
+			<div class="row">
+				<div class="col-3"></div>
+				<h1 class="titulo display-4 col-6">Nuevo</h1>
+				<div class="col-3"></div>
+			</div>
+		</header>
+		<form class="container formulario" th:action="${edicion}?@{/receta/editar}:@{/receta/guardar}" th:object="${receta}" method="post">
+			 <div class="mb-3" th:if="${edicion}">
+				<input class="form-control" type="hidden" th:field="*{id}" readonly="readonly">
+			</div>
+			<div class="mb-3" th:if="${edicion}">
+				<input class="form-control" type="hidden" th:field="*{estado}" readonly="readonly">
+			</div>
+			<br>
+			 
+			<div class="mb-3">
+				<label class="form-label">Nombre: <i class="fa-solid fa-clock"></i></label>
+				<input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Ingresa el nombre de la receta" >
+				<div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+			</div> 
+					
+			<div class="mb-3">
+				<label class="form-label" for="image">Categoría: <i class="fa-regular fa-image"></i></label>
+				<select id="categoria" class="form-select"  th:field="*{categoria}">
+					<option value="" selected>Seleccione una categoría...</option>
+					<option value="Recetas de Carnes">Recetas de Carnes</option>
+					<option value="Recetas de Bebidas">Recetas de Bebidas</option>
+					<option value="Recetas de Dulces">Recetas de Dulces</option>
+					<option value="Recetas de Ensaladas">Recetas de Ensaladas</option>
+					<option value="Recetas de Legumbres y Cereales">Recetas de Legumbres y Cereales</option>
+					<option value="Recetas de Pescados">Recetas de Pescados</option>
+					<option value="Recetas de Pan">Recetas de Pan</option>
+					<option value="Recetas de Sopas y Cremas">Recetas de Sopas y Cremas</option>
+				</select>
+				<div class="text-danger" th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}"></div>
+			</div> 
+			
+			
+			<div class="mb-3">
+			    <label class="form-label">Ingredientes:</label>
+			    <div th:each="ingrediente : ${ingredientes}">
+			        <input type="checkbox" th:field="*{ingredientes}" th:value="${ingrediente.id}" />
+			        <label th:text="${ingrediente.nombre}"></label>
+			    </div>
+			    <p class="text-danger" th:errors="*{ingredientes}"></p>
+			</div>
+			
+			<div class="mb-3">
+				<label class="form-label" for="image">Imagen:<i class="fa-regular fa-image"></i></label>
+				<select class="form-select" th:field="*{imagen}" required="required">
+				    <option value="RecetaCarne1.jpg">Receta de Carne 1</option>
+				    <option value="RecetaCarne2.jpg">Receta de Carne 2</option>
+				    <option value="RecetaBebida1.jpg">Receta de Bebida 1</option>
+				    <option value="RecetaBebida2.jpg">Receta de Bebida 2</option>
+				    <option value="RecetaDulce1.jpg">Receta Dulce 1</option>
+				    <option value="RecetaDulce2.jpg">Receta Dulce 2</option>
+				    <option value="RecetaEnsalada1.jpg">Receta de Ensalada 1</option>
+				    <option value="RecetaEnsalada2.jpg">Receta de Ensalada 2</option>
+				    <option value="RecetaCereal1.jpg">Receta de Cereal 1</option>
+				    <option value="RecetaCereal2.jpg">Receta de Cereal 2</option>
+				    <option value="RecetaPescado1.jpg">Receta de Pescado 1</option>
+				    <option value="RecetaPescado2.jpg">Receta de Pescado 2</option>
+				    <option value="RecetaPan1.jpg">Receta de Pan 1</option>
+				    <option value="RecetaPan2.jpg">Receta de Pan 2</option>
+				    <option value="RecetaCrema1.jpg">Receta de Sopas y Crema 1</option>
+				    <option value="RecetaCrema2.jpg">Receta de Sopas y Crema 2</option>
+				</select>
+			</div> 
+			
+			<div class="mb-3">
+				<label class="form-label" for="preparacion">Preparación:<i class="fa-solid fa-street-view"></i></label>
+				<input class="form-control" type="text" id="preparacion" name="preparacion_receta" th:field="*{preparacion}" placeholder="Ingresa la preparación de la receta">
+				<div class="text-danger" th:if="${#fields.hasErrors('preparacion')}" th:errors="*{preparacion}"></div>
+			</div>
+			
+			
+			
+			<input class="btn btn-success" type="submit" th:value="${editar}?'Guardar Cambios':'Guardar'">
+			<a  th:href="@{/receta/recetas}" class="btn btn-secondary" role="button" aria-disabled="true">Cancelar</a>
+			<br>
+		</form>
+		<div class="container-fluid cuerpo">
+		<table class="table caption-top">
+		
+		
+		</table>
+	</div>
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<div th:replace="~{layouts/script :: script}"></div>
+	</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head th:replace="~{/layouts/head :: head}"></head>
+	<body>
+		<nav th:replace="~{layouts/nav :: nav}" ></nav>
+		<header class="encabezado container-sm">
+				<div class="row">
+					<div class="col-3"></div>
+					<h1 class="titulo col-6">Categorias</h1>
+					<div class="col-3"></div>
+				</div>
+		</header>
+			<div class="container-fluid cuerpo_categorias" >
+				<div class="container-fluid categorias">	
+
+					<div class="categoria">
+						<a th:href="@{/receta/recetas/Recetas de Carnes}"><img th:src="@{/images/CategoriaCarnes.jpg}" alt="Receta de Carne"  ></a>
+						<h3 >Recetas de Carnes</h3>
+						<p>La carne se puede preparar de muchas maneras. Descubrelas con nuestras recetas.</p>
+					</div>
+					<div class="categoria" >
+						<a th:href="@{/receta/recetas/Recetas de Bebidas}"><img th:src="@{/images/CategoriaBebidas.jpg}" alt="Receta de Bebidas" ></a>
+						<h3 >Recetas de Bebidas</h3>
+						<p>Bebidas ideales para refrescarte en los días de calor y complementar tu menú.</p>
+					</div>
+					<div class="categoria" >
+						<a th:href="@{/receta/recetas/Recetas de Dulces}"><img th:src="@{/images/CategoriaDulces.jpg}" alt="Receta de Dulces" ></a>
+						<h3 >Recetas de Dulces</h3>
+						<p>Recopilamos las recetas de postres más sugerentes, sabrosas e irresistibles para que tú también puedas elaborarlas en casa.</p>
+					</div>
+					<div class="categoria" >
+						<a th:href="@{/receta/recetas/Recetas de Ensaladas}"><img th:src="@{/images/CategoriaEnsalada.jpg}" alt="Receta de Ensaladas" ></a>
+						<h3 >Recetas de Ensaladas</h3>
+						<p>Una gran variedad de ensaladas que puedes llegar a preparar con nuestras recetas.</p>
+					</div>
+					<div class="categoria" >
+						<a th:href="@{/receta/recetas/Recetas de Legumbres y Cereales}"><img th:src="@{/images/CategoriaCereales.jpg}" alt="Receta de Legumbres y Cereales" ></a>
+						<h3 >Recetas de Legumbres y Cereales</h3>
+						<p>Las legumbres y cereales son muy sanos, estan compuestos por proteínas, hidratos de carbono, lipidos, fibras y vitaminas.</p>
+					</div>
+					<div class="categoria" >
+						<a th:href="@{/receta/recetas/Recetas de Pescados}"><img th:src="@{/images/CategoriaPescados.jpg}" alt="Receta de Pescados" ></a>
+						<h3 >Recetas de Pescados</h3>
+						<p>Te proponemos las mejores recetas con sabor a mar. Una selección de platos con el pescado como principal ingrediente.</p>
+					</div>
+					<div class="categoria" >
+						<a th:href="@{/receta/recetas/Recetas de Pan}"><img th:src="@{/images/CategoriaPan.jpg}" alt="Receta de Pan" ></a>
+						<h3 >Recetas de Pan</h3>
+						<p>Las mejores recetas de pan explicadas paso a paso para controlar procesos de fermentación, levado y horneado.</p>
+					</div>
+					<div class="categoria" >
+						<a th:href="@{/receta/recetas/Recetas de Sopas y Cremas}"><img th:src="@{/images/CategoriaCremas.jpg}" alt="Receta de Sopas y Cremas" ></a>
+						<h3 >Recetas de Sopas Y Cremas</h3>
+						<p>La carne se puede preparar de muchas maneras. Descubrelas con nuestras recetas</p>
+					</div>
+				</div>
+			</div>			
+		<footer th:replace="~{layouts/footer :: footer}"></footer>
+		<div th:replace="~{layouts/script :: script}"></div>
+	</body>
+</html>

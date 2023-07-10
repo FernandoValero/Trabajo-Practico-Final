@@ -13,4 +13,10 @@ public interface IRecetaRepository extends CrudRepository<Receta, Long> {
 	 * Método para devolver recetas de acuerdo a su estado.
 	 */
 	public List<Receta> findByEstado(boolean estado);
+	
+	/*
+	 * Método para devolver recetas de acuerdo a su categoria.
+	 */
+    public List<Receta> findByEstadoAndCategoria(boolean estado, String categoria);
+
 }
