@@ -51,4 +51,5 @@ public interface IUsuarioService {
 	 */
 	Usuario getByIdAndAdmin(Long id, boolean admin);
 	
+	List<Usuario> getByEstadoAndAdmin(boolean estado, boolean admin);
 }

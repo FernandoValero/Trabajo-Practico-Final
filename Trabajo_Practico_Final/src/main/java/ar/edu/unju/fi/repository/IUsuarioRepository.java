@@ -20,5 +20,7 @@ public interface IUsuarioRepository extends CrudRepository<Usuario,Long>{
 	 * @param admin paramero del tipo boolean que representa el valor del tipo de usuario.
 	 * @return una lista de objetos del tipo usuario.
 	 */
-	List<Usuario> findByIdAndAdmin(Long id, boolean admin);
+	public List<Usuario> findByIdAndAdmin(Long id, boolean admin);
+	
+	public List<Usuario> findByEstadoAndAdmin(boolean estado, boolean admin);
 }

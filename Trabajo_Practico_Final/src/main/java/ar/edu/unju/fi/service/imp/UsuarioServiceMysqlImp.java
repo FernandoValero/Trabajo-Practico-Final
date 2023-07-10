@@ -35,6 +35,7 @@ public class UsuarioServiceMysqlImp implements IUsuarioService {
 		*/
 		@Override
 		public void guardar(Usuario usuario) {
+			usuario.setEstado(true);
 			usuarioRepository.save(usuario);
 		}
 		/**
@@ -87,5 +88,10 @@ public class UsuarioServiceMysqlImp implements IUsuarioService {
 				return null;
 			}
 			return listado.get(0);
+		}
+		@Override
+		public List<Usuario> getByEstadoAndAdmin(boolean estado, boolean admin) {
+			return usuarioRepository.findByEstadoAndAdmin(estado, admin);
+			
 		}
 }
