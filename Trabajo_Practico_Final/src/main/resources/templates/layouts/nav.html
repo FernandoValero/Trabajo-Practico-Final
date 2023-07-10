@@ -30,7 +30,7 @@
                 <a class="nav-link" th:href="@{/receta/recetas}">Recetas</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Testimonios</a>
+                <a class="nav-link" th:href="@{/testimonio/listado/{vista}(vista=${0})}">Testimonios</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="contactanos">Contactanos</a>
@@ -43,7 +43,7 @@
                   <li><a class="dropdown-item" href="#">Recetas</a></li>
                   <li><a class="dropdown-item" th:href="@{/ingrediente/ingredientes}">Ingredientes</a></li>
                   <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="#">Testimonios</a></li>
+                  <li><a class="dropdown-item" th:href="@{/testimonio/verificar}">Testimonios</a></li>
                   <li><a class="dropdown-item" href="#">Usuarios</a></li>
                   <li><a class="dropdown-item" th:href="@{/servicio/imc/gestion}">Indice de Masa Corporal</a></li>
                 </ul>

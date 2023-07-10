@@ -30,58 +30,84 @@ public class TestimonioController {
 	@Autowired
 	private IUsuarioService usuarioService;
 	/**
-	* Método que obtiene listado de testimonios.
+	* Método que obtiene listado de testimonios según los privilegios.
 	* @return vista "testimonios".
 	*/
-	@GetMapping("/listado/{admin}")
-	public String getTestimonioPage(@PathVariable(value="admin")String admin, Model model) {
-		boolean accion = admin.equals("admin");
-		model.addAttribute("accion", accion);
+	@GetMapping("/listado/{vista}")
+	public String getTestimonioPage(@PathVariable(value="vista")int vista,Model model) {
+		if (vista==1) {
+			model.addAttribute("vista", true);
+		}
+		else {
+			model.addAttribute("vista", false);
+		}
 		model.addAttribute("testimonios", testimonioService.getLista());
 		return "testimonios";
 	}
+	/**
+	* Método que obtiene formulario de validación de usuario administrador.
+	* @return vista "testimonios_accion".
+	*/
+	@GetMapping("/verificar")
+	public String getIngresoUsuarioAnminPage(Model model) {
+		model.addAttribute("user", true);
+		model.addAttribute("accion", 1);
+		return "testimonio_accion";
+	}
+	/**
+	* Método que obtiene formulario de validación de usuario común.
+	* @return vista "testimonios_accion".
+	*/
 	@GetMapping("/verificar/{accion}")
 	public String getIngresoUsuarioPage(@PathVariable(value="accion")Long accion, Model model) {
 		model.addAttribute("accion", accion);
+		model.addAttribute("user", false);
 		return "testimonio_accion";
 	}
+	/**
+	* Método valida al usuario a realizar acciones.
+	* @return ModelAndView con la vista: según el acción y usuario.
+	*/
 	@PostMapping("/validar")
-	public ModelAndView getIngresarFormularioTestimonioPage(@RequestParam(name="clave") Long clave,@RequestParam(name="accion") Long accion) {
+	public ModelAndView getIngresarFormularioTestimonioPage(@RequestParam(name="clave") Long clave,@RequestParam(name="accion") Long accion, @RequestParam(name="user") boolean user) {
 		ModelAndView modelAndView = new ModelAndView();
 		Usuario usuarioEncontrado = usuarioService.getBy(clave);
-		System.out.println("Texto: "+accion);
+		//accion: determina la acción según el id
 		if(usuarioEncontrado!=null) {
-			if(accion == 0) {
-				modelAndView.addObject("id", usuarioEncontrado.getId());
-				modelAndView.setViewName("redirect:/testimonio/nuevo/{id}");
+			if(user) {
+				if(usuarioEncontrado.isAdmin())
+					modelAndView.setViewName("redirect:/testimonio/listado/1");
+				else 
+					modelAndView.setViewName("redirect:/testimonio/listado/0");
 			}
 			else {
-				
-				if(accion > 0) {
-					Testimonio testimonioEncontrado = testimonioService.getBy(accion);
-					if(usuarioEncontrado.getId()==testimonioEncontrado.getUsuario().getId()) {
-						modelAndView.addObject("id", accion);
-						modelAndView.setViewName("redirect:/testimonio/modificar/{id}");
-					}
-					else {
-						modelAndView.setViewName("redirect:/testimonio/listado");
-					}
+				if(accion == 0) {
+					modelAndView.addObject("id", usuarioEncontrado.getId());
+					modelAndView.setViewName("redirect:/testimonio/nuevo/{id}");
 				}
 				else {
-					accion = accion * -1;
-					Testimonio testimonioEncontrado = testimonioService.getBy(accion);
-					if(usuarioEncontrado.isAdmin() ||usuarioEncontrado.getId()==testimonioEncontrado.getUsuario().getId()) {
-						modelAndView.addObject("id", accion);
-						modelAndView.setViewName("redirect:/testimonio/eliminar/{id}");
+						
+					if(accion > 0) {
+						Testimonio testimonioEncontrado = testimonioService.getBy(accion);
+						if(usuarioEncontrado.getId()==testimonioEncontrado.getUsuario().getId()) {
+							modelAndView.addObject("id", accion);
+							modelAndView.setViewName("redirect:/testimonio/modificar/{id}");
+						}
+						else 
+							modelAndView.setViewName("redirect:/testimonio/listado/0");
 					}
 					else {
-						modelAndView.setViewName("redirect:/testimonio/listado");
+						Testimonio testimonioEncontrado = testimonioService.getBy(accion*-1);
+						if(usuarioEncontrado.isAdmin() ||usuarioEncontrado.getId()==testimonioEncontrado.getUsuario().getId())
+							modelAndView.setViewName("redirect:/testimonio/eliminar/{accion}");
+						else 
+							modelAndView.setViewName("redirect:/testimonio/listado/0");
 					}
 				}
 			}
 		}
 		else {
-			modelAndView.setViewName("redirect:/testimonio/listado");
+			modelAndView.setViewName("redirect:/testimonio/listado/0");
 		}
 		return modelAndView;
 	}
@@ -138,20 +164,26 @@ public class TestimonioController {
 		}
 		testimonio.setFecha(LocalDate.now());
 		testimonioService.modificar(testimonio);
-		return "redirect:/testimonio/listado";
+		return "redirect:/testimonio/listado/0";
 	}
 	/**
 	* Método para eliminar un testimonio.
 	* @return vista "listado" mediante la redirección.
 	*/
 	@GetMapping("/eliminar/{id}")
-	public String eliminarTestimonio(@PathVariable(value="id")Long id) {
+	public ModelAndView eliminarTestimonio(@PathVariable(value="id")Long id) {
+		ModelAndView modelAndView = new ModelAndView("testimonios");
+		modelAndView.setViewName("redirect:/testimonio/listado/1");
+		if(id<0) {
+			id=id*-1;
+			modelAndView.setViewName("redirect:/testimonio/listado/0");
+		}
 		for(Testimonio test : testimonioService.getLista()) {
 			if(test.getId()==id) {
 				testimonioService.eliminar(test);
 				break;
 			}
 		}
-		return "redirect:/testimonio/listado";
+		return modelAndView;
 	}
 }
