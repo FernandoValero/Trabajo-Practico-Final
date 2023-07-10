@@ -5,9 +5,9 @@
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
 		<header class="encabezado container-sm">
 			<div class="row">
-				<div class="col-3"></div>
-				<h1 class="titulo display-4 col-6">Nuevo</h1>
-				<div class="col-3"></div>
+				<div class="col-5"></div>
+				<h1 class="titulo col-6">Nuevo</h1>
+				<div class="col-5"></div>
 			</div>
 		</header>
 		<form class="container formulario" th:action="${edicion}?@{/ingrediente/editar}:@{/ingrediente/guardar}" th:object="${ingrediente}" method="post">
@@ -20,13 +20,13 @@
 			<br>
 			 
 			<div class="mb-3">
-				<label class="form-label">Nombre: <i class="fa-solid fa-clock"></i></label>
+				<label class="form-label">Nombre: </label>
 				<input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Ingresa del ingrediente" >
 				<div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 			</div> 
 			
 			<input class="btn btn-success" type="submit" th:value="${editar}?'Guardar Cambios':'Guardar'">
-			<a  th:href="@{/ingrediente/ingredientes}" class="btn btn-secondary" role="button" aria-disabled="true">Cancelar</a>
+				<a  th:href="@{/ingrediente/ingredientes}" class="btn btn-secondary" role="button" aria-disabled="true">Cancelar</a>
 			<br>
 		</form>
 		<div class="container-fluid cuerpo">
