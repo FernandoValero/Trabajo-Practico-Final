@@ -69,10 +69,10 @@ public class Receta {
 	@NotEmpty(message="*Ingrediente vacío")
 	private String ingrediente;
 	*/
-	@Column(name="preparacion_receta")
+	@Column(name="preparacion_receta", columnDefinition = "LONGTEXT")
 	@Size(min=10,message="*La preparación debe ser mas detallada")
 	@NotEmpty(message="*La preparacion no debe estar vacía")
-	private StringBuffer preparacion;
+	private String preparacion;
 	
 	@Column(name="imagen_receta")
 	private String imagen;
@@ -101,7 +101,7 @@ public class Receta {
 	
 	
 	
-	public Receta(Long id, String nombre, String categoria, List<Ingrediente> ingredientes, StringBuffer preparacion, String imagen, boolean estado) {
+	public Receta(Long id, String nombre, String categoria, List<Ingrediente> ingredientes, String preparacion, String imagen, boolean estado) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -180,14 +180,14 @@ public class Receta {
 	 * Permite la salida de la preparacion
 	 @return retorna la preparacion de la receta
 	 */
-	public StringBuffer getPreparacion() {
+	public String getPreparacion() {
 		return preparacion;
 	}
 	/**
 	 * Permite la entrada del atributo preparacion
 	 * @param preparacion, valor a asignar a la preparacion de la sucursal
 	 */
-	public void setPreparacion(StringBuffer preparacion) {
+	public void setPreparacion(String preparacion) {
 		this.preparacion = preparacion;
 	}
 
