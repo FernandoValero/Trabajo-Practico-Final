@@ -14,6 +14,9 @@
   	background: white;
   	margin-bottom: 5%;
 }
+.formulario_receta_ingrediente{
+	min-height: 60vh;
+}
 
 /*BOTON*/
 .agregar{
@@ -35,7 +38,7 @@
 
 .agregar:hover{
             
-    background: #b0b0c1182187182;
+    background: white;
     color:rgb(255, 128, 0);
     box-shadow:none;
     border-radius: 10px;
@@ -140,7 +143,7 @@
   	bottom: -200px;
  	width: 100%;
 }
-.testimonio{
+.testimonios{
 	min-height: 50vh;
 }
 
