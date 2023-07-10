@@ -27,21 +27,22 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" th:href="@{/receta/recetas}">Recetas</a>
+                <a class="nav-link" th:href="@{/receta/categorias}">Recetas</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" th:href="@{/testimonio/listado/{vista}(vista=${0})}">Testimonios</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" th:href="@{/contactanos}">Contactanos</a>
+
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Gestión de Datos
                 </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Recetas</a></li>
-                  <li><a class="dropdown-item" th:href="@{/ingrediente/ingredientes}">Ingredientes</a></li>
+                  <li><a class="dropdown-item" th:href="@{/receta/gestion}">Recetas</a></li>
+                  <li><a class="dropdown-item" th:href="@{/ingrediente/gestion}">Ingredientes</a></li>
                   <li><hr class="dropdown-divider"></li>
                   <li><a class="dropdown-item" th:href="@{/testimonio/verificar}">Testimonios</a></li>
                   <li><a class="dropdown-item" th:href="@{/usuario/usuarios}">Usuarios</a></li>

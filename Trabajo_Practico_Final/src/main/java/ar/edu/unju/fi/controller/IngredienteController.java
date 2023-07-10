@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Ingrediente;
+import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.service.IIngredienteService;
+import ar.edu.unju.fi.service.IUsuarioService;
 import jakarta.validation.Valid;
 
 @Controller
@@ -21,8 +24,40 @@ import jakarta.validation.Valid;
 public class IngredienteController {
 	
 	@Autowired
+	private IUsuarioService usuarioService;
+	@Autowired
 	@Qualifier("ingredienteServiceMysql")
 	private IIngredienteService ingredienteService;
+	
+	
+	/**
+	 * Método para Validar un usuario segun su id.
+	 * En caso de que no se encuentre el usuario o de que no sea admin regresa a la pagina de login_receta_ingrediente
+	 * Si encuentra el usuario devuelve la página ingredientes para poder modificarla.
+	 */
+	@GetMapping("/validacion")
+	public String ValidacionDeUsuarioPage(@RequestParam(value = "id") Long id, Model model) {
+		Usuario usuarioBuscado = usuarioService.getByIdAndAdmin(id, true);
+		boolean entidad = true;
+		model.addAttribute("entidad", entidad);
+		if (usuarioBuscado != null) {
+			model.addAttribute("ingredientes", ingredienteService.getListaIngrediente());
+			return "ingredientes";
+		} else {
+			model.addAttribute("existeUsuario", false);
+			return "login_receta_ingrediente";
+		}
+	}
+	
+	
+	@GetMapping("/gestion")
+	public String getListaAlRecetasPage(Model model) {
+		boolean entidad = true;
+		model.addAttribute("entidad", entidad);
+		model.addAttribute("existeUsuario", true);
+		return "login_receta_ingrediente";
+	}
+	
 	
 	/**
 	 * Método para obtener los ingredientes de la BD y agregarlas al modelo.
