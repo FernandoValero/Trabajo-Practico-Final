@@ -10,9 +10,11 @@
 	<body>
 		<nav th:replace="~{layouts/nav :: nav}"></nav>
 		<header>
-				<h1>Contáctenos</h1>
+				<h1 class="text-center">Contáctenos</h1>
 		</header>
-		<form>
+		<div class="card text-center col-xs-12 col-sm-12 col-md-4 offset-md-4 mt-3">
+		<div class="card-body">
+		<form class="container" method="get">
 			<br>
 			<label class="form-label">Nombre:<i class="fa-solid fa-user"></i></label><br>
 			<input class="form-control" type="text" id="name" name="name" placeholder="Ingresa tu nombre"><br>
@@ -26,6 +28,8 @@
 			<br>
 			<br>	 
 		  </form>
+		  </div>
+		  </div>
 			<footer th:replace="~{layouts/footer :: footer}"></footer>
 			<div th:replace="~{layouts/script :: script}"></div>
 	</body>
