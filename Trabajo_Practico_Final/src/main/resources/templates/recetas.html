@@ -13,7 +13,7 @@
 			<div class="container-fluid cuerpo_recetas" th:if="!${#lists.isEmpty(recetas)}" >
 			<div class="container-fluid recetas">	
 				<div class="receta"  th:each="lista_recetas: ${recetas}">
-					<img th:src="@{/images/}+${lista_recetas.imagen}" alt="Receta de Carne"  >
+					<img th:src="@{/images/}+${lista_recetas.imagen}" alt="Imagen de receta"  >
 					<div class="mb-3" th:if="${gestion}">
 						<a th:href="@{/receta/editar/}+${lista_recetas.id}"><i class="editar-sucu fa-regular fa-pen-to-square"></i></a>
 						<a th:href="@{/receta/eliminar/}+${lista_recetas.id}"><i class="eliminar-sucu fa-solid fa-trash-can"></i></a>

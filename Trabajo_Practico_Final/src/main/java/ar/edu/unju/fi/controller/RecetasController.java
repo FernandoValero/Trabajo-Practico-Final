@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unju.fi.entity.Receta;
+import ar.edu.unju.fi.entity.Usuario;
 import ar.edu.unju.fi.service.IIngredienteService;
 import ar.edu.unju.fi.service.IRecetaService;
+import ar.edu.unju.fi.service.IUsuarioService;
 import jakarta.validation.Valid;
 
 @Controller
@@ -26,16 +29,39 @@ public class RecetasController {
 	private IRecetaService recetaService;
 	@Autowired
 	private IIngredienteService ingredienteService;
+	@Autowired
+	private IUsuarioService usuarioService;
 	
-	
+
 	/**
-	 * Método para obtener las recetas de la BD segun una categoria y agregarlas al modelo.
-	 * Devuelve la página "recetas.html".
+	 * Método para Validar un usuario segun su id.
+	 * En caso de que no se encuentre el usuario o de que no sea admin regresa a la pagina de login_receta_ingrediente
+	 * Si encuentra el usuario devuelve la página recetas para poder modificarla.
 	 */
 	@GetMapping("/validacion")
-	public String getValidacionRecetasPage() {
-		
-		return "";
+	public String ValidacionDeUsuarioPage(@RequestParam(value = "id") Long id, Model model) {
+		Usuario usuarioBuscado = usuarioService.getByIdAndAdmin(id, true);
+		boolean entidad = false;
+		model.addAttribute("entidad", entidad);
+		if (usuarioBuscado != null) {
+			
+			model.addAttribute("recetas", recetaService.getListaReceta());
+			boolean gestion=true;
+			model.addAttribute("gestion", gestion);
+			return "recetas";
+		} else {
+			model.addAttribute("existeUsuario", false);
+			return "login_receta_ingrediente";
+		}
+	}
+	
+	
+	@GetMapping("/gestion")
+	public String getListaAlRecetasPage(Model model) {
+		boolean entidad = false;
+		model.addAttribute("entidad", entidad);
+		model.addAttribute("existeUsuario", true);
+		return "login_receta_ingrediente";
 	}
 	
 	
@@ -50,10 +76,10 @@ public class RecetasController {
 	}
 	
 	/**
-	 * Método para obtener las recetas de la BD segun una categoria y agregarlas al modelo.
+	 * Método para obtener las recetas de la BD y agregarlas al modelo.
 	 * Devuelve la página "recetas.html".
-	 */
-	@GetMapping("/gestion")
+	 */	
+	@GetMapping("/recetas")
 	public String getListaAllRecetasPage(Model model) {
 		boolean gestion=true;
 		model.addAttribute("recetas",recetaService.getListaReceta());
@@ -61,17 +87,13 @@ public class RecetasController {
 		return "recetas";
 	}
 	
-	
 	/**
-	 * Método para obtener las recetas de la BD y agregarlas al modelo.
-	 * Devuelve la página "recetas.html".
+	 * Método para mostrar la página recetas_categoria.
 	 */
 	@GetMapping("/categorias")
 	public String getListaRecetasCategoriaPage(Model model) {
-		model.addAttribute("recetas",recetaService.getListaReceta());
 		return "recetas_categoria";
 	}
-	
 	
 	
 	/* 
@@ -99,10 +121,12 @@ public class RecetasController {
 	public ModelAndView getGuardarRecetaPage(@Valid @ModelAttribute("receta") Receta receta, BindingResult result) {
 		ModelAndView modelView = new ModelAndView("recetas");
 		if(result.hasErrors()) {
-			 modelView.addObject("ingredientes",ingredienteService.getListaIngrediente());
 			modelView.setViewName("nueva_receta");
+			modelView.addObject("ingredientes",ingredienteService.getListaIngrediente());
 			return modelView;
 		}
+		boolean gestion=true;
+		modelView.addObject("gestion", gestion);
 		recetaService.guardar(receta);
 		modelView.addObject("recetas", recetaService.getListaReceta());
 		return modelView;
@@ -140,7 +164,7 @@ public class RecetasController {
 			return "nueva_receta";
 		}
 		recetaService.editar(receta);
-		return "redirect:/receta/gestion";
+		return "redirect:/receta/recetas";
 	}
 
 	
@@ -154,6 +178,6 @@ public class RecetasController {
 	public String EliminarReceta(@PathVariable(value="id") Long id) {
 		Receta recetaEncontrada= recetaService.getBy(id);
 		recetaService.eliminar(recetaEncontrada);
-		return "redirect:/receta/gestion";
+		return "redirect:/receta/recetas";
 	}
 }
