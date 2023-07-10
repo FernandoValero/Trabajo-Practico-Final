@@ -27,7 +27,7 @@ public class UsuarioController {
 	public String getUsuarioPage(Model model) {
 		model.addAttribute("titulo", "Login");
 		model.addAttribute("existeUsuario", true);
-		return "usuarioLogin";
+		return "usuario_login";
 		
 	}
 	
@@ -47,7 +47,7 @@ public class UsuarioController {
 		} else {
 			model.addAttribute("existeUsuario", false);
 			model.addAttribute("titulo", "Login Gestión");
-			return "usuarioLogin";
+			return "usuario_login";
 		}
 	
 	}
