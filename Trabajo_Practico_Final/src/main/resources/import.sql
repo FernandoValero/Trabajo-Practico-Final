@@ -13,3 +13,9 @@ INSERT INTO trabajofinal.ingredientes (estado_ingrediente, id, nombre) VALUES (1
 INSERT INTO trabajofinal.ingredientes (estado_ingrediente, id, nombre) VALUES (1,9,'Tomates');
 INSERT INTO trabajofinal.ingredientes (estado_ingrediente, id, nombre) VALUES (1,10,'Aceite');
 INSERT INTO trabajofinal.ingredientes (estado_ingrediente, id, nombre) VALUES (1,11,'Limon');
+-- Recetas por defecto
+INSERT INTO trabajofinal.recetas (estado_receta, id, categoria_receta, imagen_receta, nombre_receta, preparacion_receta) VALUES (1,1, 'Recetas de Carnes', 'RecetaCarne1.jpg', 'Cordero Asado' , 'Salpimentar las paletillas, untarlas con la harina y ponerlas en una fuente. Cubrirlas con papel film y reservarlas toda la noche en el frigorífico junto con las lentejas puestas en remojo en agua fría. Al día siguiente, sacar la fuente de la carne y dejar que se temple. Precalentar el horno a 140°.Retirar las puntas a la berenjena y cortarla en daditos.Pelar y picar la cebolla y los ajos. Calentar el aceite en una cazuela grande y dorar a fuego vivo las paletillas. Retirarlas y reservarlas. Bajar el fuego y rehogar 3 minutos los ajos, la cebolla y la berenjena. Añadir las lentejas escurridas, la ralladura y el zumo de limón y el ras el hanout, cubrir de agua y mezclar. Colocar encima la carne, tapar y cocinar 2 h y 30 min en el horno, añadiendo un poco más de agua si fuera necesario. Lavar los tomatitos, ponerlos en la cazuela con el perejil picado y hornear 30 minutos más con la cazuela destapada. Repartir los platos.')
+
+-- Relacion Ingredientes-Receta
+INSERT INTO trabajofinal.receta_ingrediente (ingr_id, rec_id) VALUES (1,1);
+INSERT INTO trabajofinal.receta_ingrediente (ingr_id, rec_id) VALUES (2,1);
