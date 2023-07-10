@@ -152,11 +152,21 @@ public class IndiceMasaCorporalController {
 	 * @return String que representa la vista de gestionde imc.
 	 */
 	@GetMapping("/gestion/eliminar/{id}")
-	public String eliminarIMC(@PathVariable(value = "id") Long id) {
+	public String eliminarIMC(@PathVariable(value = "id") Long id, Model model) {
 		imcService.eliminarById(id);
-		return "redirect:/servicio/imc/gestion";
+		model.addAttribute("titulo", "Gestion | IMC");
+		model.addAttribute("listadoImc", imcService.getListaImc());
+		return "gestion_imc";
 	}
 
+	/**
+	 * Método que verifica si el usuario con el id es un usuario administrador. si es así se dirige al
+	 * la vista de gestion de IMC.
+	 * 
+	 * @param id parametro de tipo Long que representa el id del usuario.
+	 * @param model parametro del tipo Model que se usua para transferir datos entre la vista y el controller.
+	 * @return la vista de gestión de IMC.
+	 */
 	@GetMapping("/validar")
 	public String buscarUsuarioAdmin(@RequestParam(value = "id") Long id, Model model) {
 		Usuario usuarioBuscado = usuarioService.getByIdAndAdmin(id, true);
