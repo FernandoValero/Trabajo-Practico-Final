@@ -12,9 +12,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
@@ -61,10 +61,10 @@ public class Usuario {
 	@Column(name="usu_sexo")
 	private String sexo;
 	
-	@Min(value=0,message="Debe ser mayor a 0")
-	@Max(value=3,message="Debe ser menor o igual 3")
+	@DecimalMin(value = "0.26", inclusive = false, message = "La altura debe ser mayor que 25cm.")
+	@Max(value=3,message="Debe ser menor o igual 3mt")
 	@Column(name="usu_estatura")
-	private Double estatura;
+	private double estatura;
 	
 	@Column(name="usu_admin")
 	private boolean admin;

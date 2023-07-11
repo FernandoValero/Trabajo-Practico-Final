@@ -11,71 +11,65 @@
 </head>
 <body>
 	<nav th:replace="~{layouts/nav :: nav}"></nav>
-	<div
-		class="card text-center col-xs-12 col-sm-12 col-md-4 offset-md-4 mt-3">
-		<div class="formulario" th:unless="${guardadoExitoso}">
-			<h1 th:text="${perfil}"></h1>
-			<form th:action="@{/registro/enviar}" th:object="${usuario}"
-				method="post">
-				<div class="mb-3">
-					<input class="form-control" type="hidden" th:field="*{id}"
-						readonly="readonly">
+	<div class="container" style="min-height: 60vh;">
+        <div class="row">
+            <div class="card text-center col-xs-12 col-sm-12 col-md-4 offset-md-4 mt-3">
+                <div class="card-header">Registrate</div>
+                	<div class="card-body">
+						<div class="formulario" th:unless="${guardadoExitoso}">
+						<h1 th:text="${perfil}"></h1>
+						<form th:action="@{/registro/enviar}" th:object="${usuario}" method="post">
+							<div class="mb-3">
+								<input class="form-control" type="hidden" th:field="*{id}">
+							</div>
+							<div class="form-group">
+								<label for="nombre">Nombre:</label> 
+								<input type="text" class="form-control" id="nombre" name="nombre" th:field="*{nombre}" />
+								<div class="text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+							</div>
+							<div class="form-group">
+								<label for="apellido">Apellido:</label> <input type="text" class="form-control" id="apellido" name="apellido" th:field="*{apellido}"/>
+								<div class="text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
+							</div>
+							<div class="form-group">
+								<label for="email">E-mail:</label> 
+								<input type="email" class="form-control" id="email" name="email" th:field="*{email}"/>
+								<div class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+							</div>
+							<div class="form-group">
+								<label for="fecha_nacimiento">Fecha de Nacimiento:</label> 
+								<input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" th:field="*{fechaNacimiento}"/>
+								<div class="text-danger" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></div>
+							</div>
+							<div class="form-group">
+								<label for="telefono">Teléfono:</label>
+								<input type="tel" class="form-control" id="telefono" name="telefono" th:field="*{telefono}"/>
+								<div class="text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+							</div>
+							<div class="form-group">
+								<label for="sexo">Sexo:</label> <select class="form-control"
+									id="sexo" name="sexo" required th:field="*{sexo}">
+									<option value="masculino">Masculino</option>
+									<option value="femenino">Femenino</option>
+									<option value="otro">Otro</option>
+								</select>
+								<div class="text-danger" th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"></div>
+							</div>
+			
+							<div class="form-group">
+								<label for="estatura">Estatura:</label> 
+								<input type="number" class="form-control" id="estatura" name="estatura" step="0.01" th:field="*{estatura}" />
+								<div class="text-danger" th:if="${#fields.hasErrors('estatura')}" th:errors="*{estatura}"></div>
+							</div>
+							<input type="submit" class="btn btn-primary" th:value=Guardar>
+						</form>
+					</div>
+					<h3 th:if="${guardadoExitoso}" class="text-success">Guardado exitoso</h3>
+					<h4 th:if="${guardadoExitoso}" class="text-success">ID de usuario: <span th:text="${idUsuario}"></span></h4>
 				</div>
-				<div class="form-group">
-					<label for="nombre">Nombre:</label> <input type="text"
-						class="form-control" id="nombre" name="nombre" required
-						th:field="*{nombre}" />
-				</div>
-
-				<div class="form-group">
-					<label for="apellido">Apellido:</label> <input type="text"
-						class="form-control" id="apellido" name="apellido" required
-						th:field="*{apellido}" />
-				</div>
-
-				<div class="form-group">
-					<label for="email">E-mail:</label> <input type="email"
-						class="form-control" id="email" name="email" required
-						th:field="*{email}" />
-				</div>
-
-				<div class="form-group">
-					<label for="fecha_nacimiento">Fecha de Nacimiento:</label> <input
-						type="date" class="form-control" id="fecha_nacimiento"
-						name="fecha_nacimiento" required th:field="*{fechaNacimiento}" />
-				</div>
-
-				<div class="form-group">
-					<label for="telefono">Teléfono:</label> <input type="tel"
-						class="form-control" id="telefono" name="telefono" required
-						th:field="*{telefono}" />
-				</div>
-
-				<div class="form-group">
-					<label for="sexo">Sexo:</label> <select class="form-control"
-						id="sexo" name="sexo" required th:field="*{sexo}">
-						<option value="masculino">Masculino</option>
-						<option value="femenino">Femenino</option>
-						<option value="otro">Otro</option>
-					</select>
-				</div>
-
-				<div class="form-group">
-					<label for="estatura">Estatura:</label> <input type="number"
-						class="form-control" id="estatura" name="estatura" step="0.01"
-						required th:field="*{estatura}" />
-				</div>
-
-				<input type="submit" class="btn btn-primary" th:value=Guardar>
-			</form>
-
-		</div>
-		<h3 th:if="${guardadoExitoso}" class="text-success">Guardado
-			exitoso</h3>
-		<h4 th:if="${guardadoExitoso}" class="text-success">
-			ID de usuario: <span th:text="${idUsuario}"></span>
-		</h4>
-	</div>
+	 		</div>
+       	</div>
+    </div>
 	<footer th:replace="~{layouts/footer :: footer}"></footer>
 	<div th:replace="~{layouts/script :: script}"></div>
 </body>
